@@ -97,6 +97,8 @@
         wrap.setAttribute('aria-label', 'Открыть карту');
       }
       if (onOpen) onOpen(opened);
+      /* Метрика: открытие карты — цель card_open */
+      if (opened && window.ym) { try { window.ym(113733436, 'reachGoal', 'card_open'); } catch (e) {} }
     }
     wrap.onclick = toggle;
     wrap.onkeydown = function (e) {
@@ -163,6 +165,9 @@
 
     /* Колода гаснет сразу после того, как её покинула последняя карта.
        Раньше она стояла на месте всю анимацию и выглядела как «задержавшаяся старая карта». */
+    /* Метрика: карты легли — цель spread_dealt */
+    if (window.ym && nodes.length > 1) { try { window.ym(113733436, 'reachGoal', 'spread_dealt'); } catch (e) {} }
+
     var depart = 130 + (nodes.length - 1) * stagger;
     setTimeout(function () {
       deck.className = 'deal-deck';
@@ -1376,4 +1381,5 @@
     initPrefs: initPrefs
   };
 })();
+
 
