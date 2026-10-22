@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://taro.b.letmetrack.ru/taro/sitemap.xml
+Sitemap: https://vmilyakov-dev.github.io/taro/sitemap.xml
+
+
 
