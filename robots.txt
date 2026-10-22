@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://taro.b.letmetrack.ru/taro/sitemap.xml
+

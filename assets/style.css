@@ -1,0 +1,644 @@
+/* ===== Таро · тихая студия ===== */
+:root{
+  --bg:#14101d;
+  --bg-2:#1c1729;
+  --panel:#231d33;
+  --line:#3a3050;
+  --text:#ece7f5;
+  --muted:#a79fbe;
+  --gold:#d8b26a;
+  --gold-soft:#f0d9a8;
+  --accent:#8f7bd6;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --max:1080px;
+  /* единый размер карты: одинаковый везде, меняется только на узких экранах */
+  --card-w:150px;
+  /* объёмные кнопки и меню: толщина и цвета — крутятся здесь */
+  --btn3d-light:#f6e3bb; --btn3d-mid:#dcb96e; --btn3d-dark:#c39a4e; --btn3d-edge:#8a6a2f;
+  --btn3d-depth:4px;
+  --nav3d-top:#312a49;   --nav3d-mid:#251f38;  --nav3d-bottom:#1e1930; --nav3d-edge:#15111f;
+  --nav3d-depth:3px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(900px 500px at 15% -5%, #2a2140 0%, transparent 60%),
+    radial-gradient(700px 400px at 100% 0%, #241a33 0%, transparent 55%),
+    var(--bg);
+  color:var(--text);
+  font:16px/1.65 Georgia, 'Times New Roman', serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* на iPhone с «бровью» контент не залезает под вырез */
+a,button,summary,input,select,textarea{-webkit-tap-highlight-color:rgba(216,178,106,.22)}
+a{color:var(--gold-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{
+  max-width:var(--max);margin:0 auto;
+  padding-left:calc(18px + env(safe-area-inset-left));
+  padding-right:calc(18px + env(safe-area-inset-right));
+}
+
+/* шапка */
+header.site{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(10px);
+  background:rgba(20,16,29,.82);
+  border-bottom:1px solid var(--line);
+}
+header.site .wrap{display:flex;align-items:center;gap:18px;min-height:60px;flex-wrap:wrap}
+.logo{font-size:19px;letter-spacing:.06em;color:var(--gold);white-space:nowrap}
+.logo span{color:var(--muted);font-size:13px;letter-spacing:0}
+nav.main{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-size:15px}
+nav.main a{color:var(--text);opacity:.85}
+nav.main a:hover{opacity:1}
+
+/* ===== объёмные пункты меню ===== */
+nav.main > a, .nav-toggle, .nav-thanks{
+  border-radius:12px;
+  padding:8px 14px;
+  color:var(--text);opacity:1;
+  background:linear-gradient(180deg,var(--nav3d-top) 0%,var(--nav3d-mid) 55%,var(--nav3d-bottom) 100%);
+  border:1px solid #4a3f6b;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -2px 4px rgba(0,0,0,.3),
+    0 var(--nav3d-depth) 0 var(--nav3d-edge),
+    0 6px 12px rgba(0,0,0,.35);
+  transition:transform .12s ease, box-shadow .12s ease, filter .12s ease, border-color .12s ease;
+}
+nav.main > a:hover, .nav-toggle:hover{filter:brightness(1.14);text-decoration:none}
+nav.main > a:active, .nav-toggle:active{
+  transform:translateY(3px);
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.45), 0 0 0 var(--nav3d-edge), 0 2px 5px rgba(0,0,0,.35);
+}
+.nav-item.open > .nav-toggle{border-color:var(--gold);color:var(--gold-soft)}
+
+/* выпадающие пункты — та же форма, но мягче */
+.nav-panel a{
+  border-radius:10px;
+  background:linear-gradient(180deg,#2c2442 0%,#241d36 100%);
+  border:1px solid #40365e;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1), 0 2px 0 #171226;
+}
+.nav-panel a:hover{background:linear-gradient(180deg,#372d52 0%,#2a2340 100%)}
+
+/* меню: пункт с выпадающим подменю, панель открывается «переворотом» */
+.nav-item{position:relative}
+.nav-toggle{
+  background:none;border:none;color:var(--text);opacity:.85;font:inherit;font-size:15px;
+  cursor:pointer;padding:6px 0;display:inline-flex;align-items:center;gap:6px;
+}
+.nav-toggle:hover{opacity:1}
+.nav-toggle::after{content:'▾';font-size:10px;color:var(--gold);transition:transform .25s ease}
+.nav-item.open .nav-toggle{opacity:1}
+.nav-item.open .nav-toggle::after{transform:rotate(180deg)}
+.nav-panel{
+  position:absolute;top:calc(100% + 6px);left:-10px;z-index:40;min-width:236px;
+  display:flex;flex-direction:column;gap:2px;padding:8px;
+  background:linear-gradient(180deg,var(--panel),var(--bg-2));
+  border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+  transform-origin:top center;transform:rotateX(-92deg);opacity:0;pointer-events:none;
+  transition:transform .28s cubic-bezier(.2,.7,.3,1.2),opacity .18s ease;
+}
+.nav-item.open .nav-panel{transform:rotateX(0);opacity:1;pointer-events:auto}
+.nav-panel a{
+  padding:9px 12px;border-radius:9px;font-size:15px;color:var(--text);
+  opacity:.9;white-space:nowrap;
+}
+.nav-panel a:hover{background:rgba(143,123,214,.18);opacity:1;text-decoration:none}
+@media (prefers-reduced-motion:reduce){
+  .nav-panel{transition:none}
+}
+
+/* галерея колоды */
+.deck-grid{
+  display:grid;gap:16px;justify-items:center;
+  grid-template-columns:repeat(auto-fill,minmax(calc(var(--card-w) + 6px),1fr));
+  margin:14px 0 8px;
+}
+.deck-slot .cap{font-size:12px;text-align:center;max-width:calc(var(--card-w) + 10px);line-height:1.35}
+.deck-slot .cap a{color:var(--text);opacity:.85}
+.deck-slot .cap a:hover{color:var(--gold-soft);opacity:1}
+@media (max-width:560px){
+  .deck-grid{gap:12px}
+  .deck-slot .cap{font-size:11px}
+}
+
+/* секции */
+main{padding:34px 0 60px}
+h1{font-size:clamp(24px,4.4vw,36px);line-height:1.25;margin:0 0 10px;font-weight:normal}
+h2{font-size:clamp(19px,3vw,25px);margin:38px 0 12px;font-weight:normal;color:var(--gold-soft)}
+h3{font-size:17px;margin:22px 0 8px;color:var(--gold-soft);font-weight:normal}
+.lead{color:var(--muted);font-size:17px;max-width:70ch}
+p{max-width:75ch}
+
+/* кнопки */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;border:1px solid var(--gold);
+  background:linear-gradient(180deg,#e6c583,#c9a057);
+  color:#231d0f;font:inherit;font-size:16px;
+  min-height:48px;padding:12px 24px;border-radius:999px;transition:.18s;
+  text-align:center;
+}
+.btn:hover{filter:brightness(1.07);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--gold-soft);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--gold)}
+.btn:disabled{opacity:.5;cursor:default}
+
+/* панели */
+.panel{
+  background:linear-gradient(180deg,var(--panel),var(--bg-2));
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);
+}
+.grid{display:grid;gap:16px}
+@media(min-width:760px){.grid.c3{grid-template-columns:repeat(3,1fr)}.grid.c2{grid-template-columns:1fr 1fr}}
+
+/* карта */
+.card{
+  width:var(--card-w);aspect-ratio:5/8;border-radius:12px;border:1px solid var(--gold);
+  background:linear-gradient(160deg,#2b2340,#1a1526 70%);
+  position:relative;overflow:hidden;flex:0 0 auto;
+  box-shadow:var(--shadow);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:10px;
+}
+.card .num{position:absolute;top:8px;left:10px;font-size:13px;color:var(--gold);opacity:.9}
+.card .sym{font-size:34px;color:var(--gold-soft);margin-bottom:6px}
+.card .nm{font-size:14px;line-height:1.35}
+.card .el{position:absolute;bottom:8px;font-size:11px;color:var(--muted)}
+/* изображение карты поверх текстового запасного вида */
+.card .face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:11px;display:block}
+.card .art{width:100%;border-radius:11px;display:block}
+.card.small{width:var(--card-w)}
+.card.back{background:
+   repeating-linear-gradient(45deg,#241d36 0 8px,#2c2444 8px 16px);
+   border-color:var(--accent)}
+.card.small{width:104px}
+.card.rev .sym{transform:rotate(180deg)}
+.slot{display:flex;flex-direction:column;align-items:center;gap:8px}
+.slot .cap{font-size:13px;color:var(--muted);text-align:center}
+.deck{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+
+/* таблицы и списки */
+table{width:100%;border-collapse:collapse;font-size:15px;font-family:system-ui,Segoe UI,Arial,sans-serif}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--gold-soft);font-weight:600}
+ul.clean{list-style:none;padding:0}
+ul.clean li{padding:7px 0;border-bottom:1px solid rgba(58,48,80,.55)}
+.tag{display:inline-block;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin:0 6px 6px 0}
+
+/* справочник */
+.cards-index{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.cards-index a{
+  display:block;padding:9px 12px;border:1px solid var(--line);border-radius:10px;
+  background:rgba(35,29,51,.6);color:var(--text)
+}
+.cards-index a:hover{border-color:var(--gold);text-decoration:none}
+
+/* широкие таблицы на телефоне прокручиваются, а не ломают вёрстку */
+.table-scroll{overflow-x:auto;margin:12px 0;-webkit-overflow-scrolling:touch}
+.table-scroll table{min-width:620px}
+.table-scroll td:first-child{white-space:nowrap}
+
+/* формы */
+label{display:block;font-size:14px;color:var(--muted);margin:14px 0 6px}
+input[type=text],select,textarea{
+  width:100%;background:#171223;border:1px solid var(--line);color:var(--text);
+  border-radius:10px;padding:11px 13px;font:inherit;font-size:16px;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--muted);
+  border-radius:999px;padding:6px 13px;font:inherit;font-size:14px;cursor:pointer}
+.chip:hover{border-color:var(--gold);color:var(--text)}
+
+/* результат расклада */
+.triplet{display:grid;gap:18px;justify-items:center;margin-top:8px}
+@media(min-width:680px){.triplet{grid-template-columns:repeat(3,1fr)}}
+.reading{margin-top:14px}
+.reading .pos{font-size:13px;color:var(--gold);letter-spacing:.04em;text-transform:uppercase}
+
+/* сетка расклада на 4–12 карт */
+.spread-grid{
+  display:grid;gap:16px;justify-items:center;
+  grid-template-columns:repeat(auto-fit,minmax(var(--card-w),1fr));
+  margin:14px 0 6px;
+}
+.spread-grid .cap{font-size:12px;max-width:calc(var(--card-w) + 10px)}
+@media(max-width:680px){
+  .spread-grid{gap:10px}
+  .spread-grid .sym{font-size:28px}
+  .spread-grid .cap{font-size:11px}
+}
+
+/* кельтский крест */
+.celtic{
+  display:grid;gap:8px;justify-items:center;align-items:start;margin:14px 0 26px;
+  grid-template-columns:repeat(3,auto);
+  grid-template-areas:
+    ". p3 ."
+    ". p6 ."
+    "p5 p12 p4"
+    ". p8 ."
+    ". p10 ."
+    ". p7 ."
+    ". p9 .";
+}
+.celtic-slot .cap{font-size:12px;max-width:calc(var(--card-w) + 10px)}
+.celtic .pair{display:flex;align-items:center}
+@media(max-width:680px){
+  .celtic{gap:6px}
+  .celtic-slot .cap{font-size:11px}
+  .celtic-slot .sym{font-size:26px}
+}
+
+/* подвал */
+footer.site{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:14px;font-family:system-ui,Segoe UI,Arial,sans-serif}
+footer.site a{color:var(--muted);text-decoration:underline}
+.disclaimer{font-size:13px;color:var(--muted);border-left:2px solid var(--line);padding-left:12px;margin:22px 0}
+.note{background:rgba(143,123,214,.12);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px;color:var(--text)}
+.question{color:var(--gold-soft);font-style:italic;margin:8px 0 0}
+.reading-item .question{border-left:2px solid var(--line);padding-left:10px}
+.breadcrumbs{font-size:13px;color:var(--muted);font-family:system-ui,Segoe UI,Arial,sans-serif;margin-bottom:10px}
+.art{padding:18px 0;border-bottom:1px solid var(--line)}
+.art h3{margin:0 0 6px}
+.art .meta{font-size:13px;color:var(--muted)}
+
+/* ===== переворот карты и оформление колоды ===== */
+.flip{width:var(--card-w);aspect-ratio:5/8;perspective:900px;flex:0 0 auto}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s ease}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-side{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip-side.front{transform:rotateY(180deg)}
+.flip .card{width:100%;height:100%}
+.card-back .face{object-fit:cover}
+
+/* карта ведёт себя как кнопка — видно, что её можно открыть */
+.flip{cursor:pointer;transition:transform .22s ease}
+.flip:hover{transform:translateY(-4px)}
+.flip:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:14px}
+.flip.flipped{cursor:default}
+.flip.flipped:hover{transform:none}
+.open-hint{text-align:center;color:var(--gold-soft);margin:4px 0 16px}
+.open-all-row{
+  display:flex;flex-wrap:nowrap;gap:12px;justify-content:center;
+  margin:14px 0 20px;
+}
+.open-all{flex:1 1 0;max-width:280px;min-width:0;margin:0;white-space:nowrap}
+
+/* объёмные кнопки: свет сверху, тень снизу, нажатие «вдавливает» */
+.btn.open-all{
+  border-radius:14px;
+  color:#241d0f;
+  background:linear-gradient(180deg,var(--btn3d-light) 0%,var(--btn3d-mid) 48%,var(--btn3d-dark) 100%);
+  border:1px solid #a8823c;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -3px 6px rgba(120,86,20,.25),
+    0 var(--btn3d-depth) 0 var(--btn3d-edge),
+    0 9px 18px rgba(0,0,0,.45);
+  transform:translateY(0);
+  transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.btn.open-all:hover{filter:brightness(1.05);box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -3px 6px rgba(120,86,20,.25),
+    0 calc(var(--btn3d-depth) + 1px) 0 var(--btn3d-edge),
+    0 12px 22px rgba(0,0,0,.5);}
+.btn.open-all:active{transform:translateY(var(--btn3d-depth));box-shadow:
+    inset 0 2px 6px rgba(90,64,15,.45),
+    0 0 0 var(--btn3d-edge),
+    0 2px 6px rgba(0,0,0,.45);}
+.btn.open-all:focus-visible{outline:2px solid var(--gold-soft);outline-offset:3px}
+
+/* «Закрыть» — та же форма, но тёмная, чтобы не путалась с «Открыть» */
+.btn.open-all-close{
+  color:var(--gold-soft);
+  background:linear-gradient(180deg,#3b3157 0%,#2b2340 50%,#221c33 100%);
+  border:1px solid #574a7d;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -3px 6px rgba(0,0,0,.35),
+    0 var(--btn3d-depth) 0 var(--nav3d-edge),
+    0 9px 18px rgba(0,0,0,.45);
+}
+.btn.open-all-close:hover{filter:brightness(1.12);box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -3px 6px rgba(0,0,0,.35),
+    0 calc(var(--btn3d-depth) + 1px) 0 var(--nav3d-edge),
+    0 12px 22px rgba(0,0,0,.5);}
+.btn.open-all-close:active{transform:translateY(var(--btn3d-depth));box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.5),
+    0 0 0 var(--nav3d-edge),
+    0 2px 6px rgba(0,0,0,.45);}
+
+@media (max-width:560px){
+  .open-all-row{gap:8px;margin:12px 0 16px}
+  .btn.open-all{font-size:14px;min-height:46px;padding:8px 10px;border-radius:12px}
+}
+.reading-item{animation:appear .35s ease both}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.btn:focus-visible,.chip:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){
+  .flip,.flip-inner{transition:none !important}
+  .reading-item{animation:none}
+}
+
+/* размеры карт: один и тот же размер во всех раскладах и галереях */
+.spread-grid .flip,
+.triplet .flip,
+.celtic-slot .flip,
+.deck-grid .flip{width:var(--card-w)}
+/* перевёрнутая поперёк карта в Кельтском кресте — сдвиг считается от размера карты */
+.celtic .pair .flip + .flip{margin-left:calc(var(--card-w) * -0.58);transform:rotate(90deg)}
+
+@media(max-width:560px){ :root{ --card-w:104px } }
+@media(max-width:400px){ :root{ --card-w:92px } }
+
+/* единый вид карт: подлинные гравюры 1909 года, обработок больше нет */
+
+/* блок оформления в панели расклада */
+#prefs-slot{margin-top:14px;padding:0;border:none;background:none;box-shadow:none}
+#prefs-slot:empty{display:none}
+details.prefs{margin-top:0;border-top:1px solid var(--line);padding-top:12px}
+#prefs-slot details.prefs{border-top:none;padding-top:0}
+details.prefs>summary{cursor:pointer;color:var(--gold-soft);font-size:15px;list-style:none}
+details.prefs>summary::-webkit-details-marker{display:none}
+details.prefs>summary::before{content:'▸ ';color:var(--gold)}
+details.prefs[open]>summary::before{content:'▾ '}
+details.prefs label{margin-top:10px}
+details.prefs .hint{margin-top:8px}
+
+/* колода, из которой раздаются карты */
+.deal-deck{
+  position:fixed;left:50%;bottom:26px;width:var(--card-w);height:calc(var(--card-w) * 1.6);
+  transform:translateX(-50%);z-index:6;pointer-events:none;opacity:0;transition:opacity .35s ease;
+}
+.deal-deck.show{opacity:1}
+.deal-deck img{
+  position:absolute;inset:0;width:100%;height:100%;border-radius:12px;
+  border:1px solid var(--gold);box-shadow:0 10px 26px rgba(0,0,0,.5);object-fit:cover;
+}
+@media (max-width:560px){ .deal-deck{bottom:14px} }
+@media print{ .deal-deck{display:none !important} }
+
+/* ===== «Спасибо»: карта с QR для оплаты ===== */
+.thanks-overlay{
+  position:fixed;inset:0;z-index:80;background:rgba(10,8,15,.86);backdrop-filter:blur(5px);
+  display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:26px 16px 44px;
+}
+.thanks-box{max-width:460px;width:100%;text-align:center}
+.thanks-box .hint{margin:0 0 12px}
+.thanks-card{width:min(310px,82vw);aspect-ratio:5/8;margin:0 auto}
+
+.thanks-front{
+  width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:18px;text-align:center;position:relative;overflow:hidden;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(216,178,106,.16), transparent 62%),
+    linear-gradient(160deg,#2e2543,#191426 70%);
+}
+/* внутренняя рамка с орнаментом */
+.thanks-frame{
+  position:absolute;inset:9px;border:1px solid rgba(216,178,106,.32);border-radius:12px;
+  box-shadow:inset 0 0 0 1px rgba(216,178,106,.1);
+  pointer-events:none;
+}
+.thanks-frame::before,.thanks-frame::after{
+  content:'';position:absolute;width:16px;height:16px;border:1px solid rgba(216,178,106,.55);
+}
+.thanks-frame::before{left:8px;top:8px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
+.thanks-frame::after{right:8px;bottom:8px;border-left:0;border-top:0;border-radius:0 0 6px 0}
+
+.thanks-title{
+  margin:0;color:var(--gold-soft);font-size:17px;letter-spacing:.03em;position:relative;z-index:1;
+}
+.thanks-divider{display:flex;align-items:center;justify-content:center;gap:8px;position:relative;z-index:1}
+.thanks-divider::before,.thanks-divider::after{content:'';height:1px;width:44px}
+.thanks-divider::before{background:linear-gradient(90deg,transparent,rgba(216,178,106,.8))}
+.thanks-divider::after{background:linear-gradient(90deg,rgba(216,178,106,.8),transparent)}
+.thanks-divider i{width:6px;height:6px;border:1px solid var(--gold);transform:rotate(45deg);display:block}
+
+.thanks-qr-frame{
+  position:relative;z-index:1;display:inline-block;padding:9px;border-radius:14px;background:#fff;
+  box-shadow:0 12px 26px rgba(0,0,0,.5), 0 0 0 1px rgba(216,178,106,.55), 0 0 0 5px rgba(216,178,106,.1);
+}
+.thanks-qr{display:block;width:min(186px,54vw);height:auto;border-radius:6px}
+.thanks-hint{margin:0;font-size:12px;color:var(--muted);position:relative;z-index:1}
+.thanks-sub{margin:0;font-size:11px;color:var(--muted);opacity:.8;position:relative;z-index:1}
+
+.thanks-amounts{margin:18px 0 6px;justify-content:center}
+.thanks-amounts .chip{min-height:38px;padding:8px 15px;background:rgba(35,29,51,.6)}
+.thanks-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:10px 0 0}
+.thanks-actions .btn{flex:1 1 180px;max-width:240px;margin:0}
+.thanks-pay{min-height:50px}
+@media (max-width:560px){
+  .thanks-overlay{padding:16px 12px 34px}
+  .thanks-card{width:min(268px,76vw)}
+  .thanks-actions .btn{flex:1 1 100%}
+  .thanks-qr{width:min(160px,48vw)}
+}
+
+@media (max-width:700px){
+  /* на телефоне объём читается слабее: те же пиксели выглядят мельче, а наведения нет.
+     Поэтому толщину увеличиваем, а тень делаем заметнее. */
+  :root{ --btn3d-depth:7px; --nav3d-depth:5px }
+  .btn.open-all{box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.65),
+    inset 0 -4px 8px rgba(120,86,20,.3),
+    0 var(--btn3d-depth) 0 var(--btn3d-edge),
+    0 14px 26px rgba(0,0,0,.5);}
+  .btn.open-all-close{box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -4px 8px rgba(0,0,0,.4),
+    0 var(--btn3d-depth) 0 var(--nav3d-edge),
+    0 14px 26px rgba(0,0,0,.5);}
+  nav.main > a, .nav-toggle, .nav-thanks{
+    padding:10px 15px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 -3px 5px rgba(0,0,0,.34),
+      0 var(--nav3d-depth) 0 var(--nav3d-edge),
+      0 10px 18px rgba(0,0,0,.42);
+  }
+}
+
+/* печать личного разбора и сохранение в PDF */
+@media print{
+  body{background:#fff;color:#111;font-size:12pt}
+  body::before,#dust{display:none !important}
+  header.site,footer.site,.btn,nav.main,details.prefs,.prefs{display:none !important}
+  .wrap{max-width:none;padding:0}
+  .panel{background:#fff;border:1px solid #bbb;box-shadow:none;page-break-inside:avoid}
+  h1,h2,h3{color:#111}
+  h2{page-break-after:avoid}
+  a{color:#111;text-decoration:none}
+  .card{border-color:#999;box-shadow:none}
+  .note{background:#f4f4f4;border-color:#bbb}
+  .disclaimer{border-color:#bbb}
+}
+
+/* ===== мобильные экраны: iPhone и Android ===== */
+@media (max-width:700px){
+  /* широкие таблицы прокручиваются пальцем, а не вылезают за экран */
+  main table{display:block;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+  .table-scroll table{min-width:560px}
+}
+
+@media (max-width:560px){
+  body{font-size:16px;line-height:1.6}
+  main{padding:22px 0 44px}
+  h1{font-size:23px}
+  h2{font-size:19px;margin:28px 0 10px}
+  h3{font-size:16px}
+  .lead{font-size:16px}
+  .panel{padding:16px;border-radius:14px}
+
+  /* кнопки крупные и во всю ширину — пальцем не промахнуться */
+  p > .btn, .panel > .btn, .reading > .btn{display:flex;width:100%;margin:10px 0}
+  .btn:not(.open-all){min-height:52px;font-size:17px}
+  .open-all{width:auto;min-height:44px;font-size:15px;padding:10px 18px;margin:16px auto 6px}
+  .chip{min-height:42px;padding:9px 15px;font-size:15px}
+
+  /* шапка: пункты меню прокручиваются по горизонтали, а не переносятся */
+  header.site .wrap{gap:8px;min-height:auto;padding-top:10px;padding-bottom:8px}
+  .logo{font-size:17px}
+  .logo span{display:none}
+  nav.main{
+    width:100%;margin-left:0;flex-wrap:nowrap;overflow-x:auto;gap:16px;
+    padding-bottom:4px;scrollbar-width:none;
+  }
+  nav.main::-webkit-scrollbar{display:none}
+  nav.main a{white-space:nowrap;font-size:15px;padding:4px 0}
+
+  /* подменю на телефоне раскрывается во всю ширину под шапкой */
+  .nav-item{position:static}
+  .nav-toggle{font-size:15px;padding:4px 0}
+  .nav-panel{
+    top:auto;left:calc(8px + env(safe-area-inset-left));right:calc(8px + env(safe-area-inset-right));
+    min-width:0;padding:6px;
+  }
+  .nav-panel a{padding:12px 14px;font-size:16px}
+
+  /* карты: три карты в ряд даже на телефоне (размер задаёт --card-w) */
+  .triplet{grid-template-columns:repeat(3,1fr);gap:10px}
+  .spread-grid{gap:12px}
+  .slot .cap{font-size:12px}
+
+  /* поля: 16px обязательно — иначе iOS сам увеличивает страницу при фокусе */
+  input[type=text],select,textarea{font-size:16px;min-height:48px}
+  textarea{min-height:118px}
+  .open-hint{font-size:14px}
+}
+
+@media (max-width:400px){
+  h1{font-size:21px}
+  .spread-grid{gap:10px}
+  .celtic{gap:4px}
+  .celtic-slot .cap{font-size:10px}
+  .panel{padding:14px}
+}
+
+/* телефон в горизонтальной ориентации: шапка не съедает пол-экрана */
+@media (max-height:520px) and (orientation:landscape){
+  header.site{position:static}
+  main{padding-top:16px}
+}
+
+/* ===== фон: мягкий перелив и звёздная пыль (выбор владельца 07.10.2026) =====
+   Отключить: убрать этот блок и вызов initDust() в app.js.
+   Копия прежнего вида — backups/утверждено_07.10.2026/                        */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(45deg,#14101d,#241d33,#2f2450,#181428,#14101d);
+  background-size:400% 400%;
+  animation:skyBreathe 24s ease infinite;
+}
+@keyframes skyBreathe{
+  0%{background-position:0 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0 50%}
+}
+#dust{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){
+  body::before{animation:none}
+}
+@media (max-width:700px){
+  body::before{animation-duration:34s}
+}
+
+
+/* ---------- мини-приложение Телеграма: сайт как приложение ---------- */
+/* Всё это работает только внутри Телеграма (body.tg-app), обычный сайт не меняется. */
+.tg-app{ padding-bottom: calc(60px + env(safe-area-inset-bottom)) }
+.tg-app footer.site .wrap p:nth-child(2){ display:none }   /* дублирующие ссылки: они есть во вкладке «Ещё» */
+
+.tg-tabs{
+  position:fixed; left:0; right:0; bottom:0; z-index:60;
+  display:flex; align-items:stretch;
+  background:#14101d; border-top:1px solid rgba(255,255,255,.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tg-tab{
+  flex:1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; padding:8px 4px 9px; min-height:56px;
+  font:inherit; font-size:11px; line-height:1.1; letter-spacing:.02em;
+  color:#b9aecd; text-decoration:none; background:none; border:0; cursor:pointer;
+}
+.tg-tab span{ font-size:19px; line-height:1 }
+.tg-tab.on{ color:#f3e9ff }
+.tg-tab.on span{ filter:drop-shadow(0 0 6px rgba(180,140,255,.55)) }
+.tg-tab:active{ background:rgba(255,255,255,.05) }
+
+.tg-more{
+  position:fixed; inset:0; z-index:80; display:flex; align-items:flex-end;
+  background:rgba(8,6,14,.72);
+}
+.tg-more-box{
+  width:100%; max-height:82vh; overflow:auto; box-sizing:border-box;
+  background:#191325; border-top-left-radius:18px; border-top-right-radius:18px;
+  padding:16px 16px calc(20px + env(safe-area-inset-bottom));
+  box-shadow:0 -12px 32px rgba(0,0,0,.45);
+}
+.tg-more-title{ margin:2px 0 12px; font-size:15px; letter-spacing:.06em; text-transform:uppercase; color:#b9aecd }
+.tg-more-link{
+  display:block; padding:13px 14px; margin-bottom:8px; border-radius:12px;
+  background:rgba(255,255,255,.045); color:#efe7ff; text-decoration:none; font-size:15px;
+}
+.tg-more-link:active{ background:rgba(255,255,255,.09) }
+
+/* фон-луна: начало (правится src/apply-luna.js, не руками) */
+/* Цифры подобраны владельцем в design/luna.html и применены src/apply-luna.js.
+   Лунa лежит в public/assets/img/luna.jpg (сжатая копия design/img/luna.jpg).
+   Телефон — до 900 px, компьютер — от 900 px; у каждого раздела свои значения. */
+html[data-bg]::before{ content:''; position:fixed; z-index:-1; pointer-events:none; }
+
+/* телефон */
+html[data-bg]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.55),rgba(9,7,15,0.55)),url(img/luna-sm.jpg);background-position:50% 35%,50% 35%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+html[data-bg="rasklad"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.55),rgba(9,7,15,0.55)),url(img/luna-sm.jpg);background-position:50% 35%,50% 35%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+html[data-bg="karty"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.65),rgba(9,7,15,0.65)),url(img/luna-sm.jpg);background-position:50% 35%,50% 35%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+html[data-bg="more"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.55),rgba(9,7,15,0.55)),url(img/luna-sm.jpg);background-position:50% 35%,50% 35%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+
+/* компьютер (от 900 px): у больших экранов свои цифры */
+@media (min-width:900px){
+  html[data-bg="main"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.45),rgba(9,7,15,0.45)),url(img/luna.jpg);background-position:50% 40%,50% 40%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+  html[data-bg="rasklad"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.45),rgba(9,7,15,0.45)),url(img/luna.jpg);background-position:50% 40%,50% 40%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+  html[data-bg="karty"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.60),rgba(9,7,15,0.60)),url(img/luna.jpg);background-position:50% 40%,50% 40%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+  html[data-bg="more"]::before{ inset:-40px;background-image:linear-gradient(rgba(9,7,15,0.45),rgba(9,7,15,0.45)),url(img/luna.jpg);background-position:50% 40%,50% 40%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:blur(0px) brightness(88%) contrast(100%); }
+}
+
+/* печать: фон не нужен */
+@media print{ html[data-bg]::before{ display:none } }
+/* фон-луна: конец */
+
+
+/* динамическая луна: подключается из index.html, откат — удалить script */
+@import url("moon-bg.css");

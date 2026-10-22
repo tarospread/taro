@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru" data-bg="main">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Таро онлайн — карта дня, расклад на 3 карты и значения 78 карт</title>
+<meta name="description" content="Бесплатное Таро онлайн: карта дня, расклад на три карты с разбором и полный справочник значений 78 карт Райдера-Уэйта. Не предсказание судьбы, а инструмент для размышления.">
+<link rel="canonical" href="https://taro.b.letmetrack.ru/">
+<link rel="stylesheet" href="/static/taro/assets/style.css">
+<link rel="icon" href="/static/taro/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Таро онлайн — карта дня и расклад на 3 карты">
+<meta property="og:description" content="Карта дня, расклад на три карты и значения 78 карт Таро простыми словами.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/static/taro/assets/moon.css">
+</head>
+<body>
+<div id="moon-hero" aria-hidden="true"></div>
+<header class="site">
+  <div class="wrap">
+    <div class="logo">Тихая колода <span>· таро для размышления</span></div>
+  <nav class="main">
+    <a href="/static/taro/">Карта дня</a>
+    <div class="nav-item">
+      <button class="nav-toggle" type="button" aria-expanded="false">Расклады</button>
+      <div class="nav-panel">
+        <a href="/static/taro/rasklad.html">На 3 карты</a>
+        <a href="/static/taro/keltskiy-krest.html">Кельтский крест</a>
+        <a href="/static/taro/rasklad-na-god.html">На год (12 карт)</a>
+        <a href="/static/taro/rasklad-na-otnosheniya.html">На отношения (5 карт)</a>
+        <a href="/static/taro/rasklad-zerkalo.html">«Зеркало» (4 карты)</a>
+        <a href="/static/taro/rasklad-tri-yogurta.html">rasklad-tri-yogurta</a>
+        <a href="/static/taro/rasklad-put.html">«Путь» (7 карт)</a>
+        <a href="/static/taro/rasklady.html">Все расклады</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-toggle" type="button" aria-expanded="false">Значения карт</button>
+      <div class="nav-panel">
+        <a href="/static/taro/karty/">Все 78 карт</a>
+        <a href="/static/taro/koloda.html">Колода в картинках</a>
+        <a href="/static/taro/tablica-znacheniy.html">Сводная таблица</a>
+        <a href="/static/taro/karty/#majors">Старшие Арканы</a>
+        <a href="/static/taro/karty/#wands">Жезлы</a>
+        <a href="/static/taro/karty/#cups">Кубки</a>
+        <a href="/static/taro/karty/#swords">Мечи</a>
+        <a href="/static/taro/karty/#pentacles">Пентакли</a>
+      </div>
+    </div>
+    <a href="/static/taro/blog/">Статьи</a>
+    <a href="/static/taro/legenda.html">Легенда</a>
+    <button class="nav-thanks" type="button">Спасибо</button>
+  </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Карта дня</h1>
+  <p class="lead">Одна карта на весь день — без «перегадывания». Посмотрите, какая энергия сегодня в фокусе, и что она советует.</p>
+
+  <div class="grid c2" style="align-items:start">
+    <div id="day-card" class="slot"></div>
+    <div class="panel">
+      <div class="pos" id="day-date" style="font-size:13px;color:var(--gold)"></div>
+      <div id="day-text"><p>Загружаем карту…</p></div>
+      <p class="hint">Карта дня одинакова для всех посетителей в этот день. Трактовка — повод подумать, а не приговор.</p>
+      <div id="prefs-slot"></div>
+    </div>
+  </div>
+
+  <div class="grid c3" style="margin-top:34px">
+    <a class="panel" href="/static/taro/rasklad.html" style="display:block">
+      <h3 style="margin-top:0">Расклад на 3 карты</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Задайте открытый вопрос — получите разбор по трём позициям и целостную картину.</p>
+    </a>
+    <a class="panel" href="/static/taro/karty/" style="display:block">
+      <h3 style="margin-top:0">Значения 78 карт</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Старшие и Младшие Арканы: прямое и перевёрнутое положение, совет карты, темы любви, работы и денег.</p>
+    </a>
+    <a class="panel" href="/static/taro/blog/kak-zadavat-voprosy-kolode.html" style="display:block">
+      <h3 style="margin-top:0">Как задавать вопросы колоде</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Главный навык в работе с Таро: от формулировки зависит большая часть ответа.</p>
+    </a>
+    <a class="panel" href="/static/taro/keltskiy-krest.html" style="display:block">
+      <h3 style="margin-top:0">Кельтский крест</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Большой расклад на 10 карт для сложной ситуации: прошлое, препятствие, окружение, страхи и итог.</p>
+    </a>
+  </div>
+
+  <p class="hint" style="margin-top:14px">Все расклады: <a href="/static/taro/rasklady.html">на 3 карты, Кельтский крест, на год (12 карт), на отношения, «Зеркало» и «Путь»</a>.</p>
+
+  <h2>Почему именно так</h2>
+  <p>Таро здесь — не «предсказание неизбежного». Карты показывают энергию момента и скрытые тенденции, помогая взглянуть на ситуацию со стороны. Мы не пугаем и не обещаем чудес: смысл расклада — в вопросах, которые вы себе задаёте.</p>
+  <ul class="clean">
+    <li><strong>Без запугивания.</strong> «Смерть» в Таро — про завершение этапа, а не про смерть. «Башня» — про слом старого, а не про катастрофу.</li>
+    <li><strong>Без «да/нет».</strong> Карты описывают процессы и варианты, а не выносят приговор.</li>
+    <li><strong>Ответственность у вас.</strong> Расклад не заменяет врача, юриста и ваше собственное решение.</li>
+  </ul>
+
+  <p class="disclaimer">Сайт носит развлекательный и рефлексивный характер. Материалы не являются медицинской, юридической или финансовой консультацией.</p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>© Тихая колода. Колода Райдера-Уэйта-Смит (1909).</p>
+    <p>Расклады: <a href="/static/taro/rasklad.html">на 3 карты</a> · <a href="/static/taro/keltskiy-krest.html">Кельтский крест</a> · <a href="/static/taro/rasklad-na-god.html">на год</a> · <a href="/static/taro/rasklad-na-otnosheniya.html">на отношения</a> · <a href="/static/taro/rasklad-zerkalo.html">«Зеркало»</a> · <a href="/static/taro/rasklad-tri-yogurta.html">rasklad-tri-yogurta</a> · <a href="/static/taro/rasklad-put.html">«Путь»</a></p>
+    <p><a href="/static/taro/">Карта дня</a> · <a href="/static/taro/rasklady.html">Все расклады</a> · <a href="/static/taro/karty/">Значения 78 карт</a> · <a href="/static/taro/blog/">Статьи</a> · <a href="/static/taro/legenda.html">Легенда о колоде</a> · <a href="/static/taro/o-kolode.html">О колоде и правах</a></p>
+    <p class="hint">Иллюстрации: Памела Колман Смит, колода Райдера-Уэйта-Смит, 1909 — общественное достояние (Wikimedia Commons).</p>
+    
+    <p class="hint">Материалы носят развлекательный характер и не заменяют консультацию врача, юриста или психолога.</p>
+  </div>
+</footer>
+
+<script>window.SITE_BASE="/static/taro";window.SITE_BOT="tikhiyrasklad_bot";window.SITE_PRETTY=false;window.TARO_POS_SETS={"Y":["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],"O":["Ты","Партнёр","Сильная сторона","Слабая сторона","Перспектива"],"Z":["Как вас видят","Что внутри","Сильные стороны","Зона роста"],"P":["Опора тела","Опора дела","Опора души"],"R":["Причина","Опыт","Багаж","Сейчас","Ближняя перспектива","Средняя перспектива","Дальняя перспектива"]};window.TARO_QUESTIONS={"shut":"Что нового я боюсь начать — и что будет, если всё-таки начну?","mag":"Какие свои умения я до сих пор не использовал?","verhovnaya-zhritsa":"Что я уже знаю, но не решаюсь себе признать?","imperatritsa":"О чём мне нужно позаботиться — начиная с себя?","imperator":"Где мне не хватает порядка и ясных границ?","ierofant":"Чей опыт стоит перенять, а чьи правила — отпустить?","vlyublennye":"Какой выбор я откладываю и почему?","kolesnitsa":"Что мешает мне двигаться к цели прямо сейчас?","sila":"Где я давлю силой там, где нужно терпение?","otshelnik":"От чего я убегаю в занятость вместо тишины?","koleso-fortuny":"Что в моей жизни уже меняется, а я сопротивляюсь?","spravedlivost":"Где я не готов принять последствия своих решений?","poveshennyy":"Что я увижу, если посмотрю на ситуацию с другой стороны?","smert":"Что давно закончилось, но я всё ещё это держу?","umerennost":"Где я ухожу в крайности вместо середины?","dyavol":"Какая привычка держит меня крепче, чем я думаю?","bashnya":"Что разрушилось бы мне на пользу, если бы рухнуло?","zvezda":"Во что я перестал верить — и стоит ли это вернуть?","luna":"Где я вижу то, чего нет, или не вижу того, что есть?","solntse":"Чему я не позволяю себя радовать?","sud":"Какой зов я слышу, но откладываю?","mir":"Какой этап завершён — и что я ещё не отпустил?","tuz-zhezlov":"Какая искра во мне ждёт первого шага?","dvoyka-zhezlov":"Какой выбор я откладываю, стоя на пороге?","troyka-zhezlov":"Куда я уже вложил силы — и что это приносит?","chetverka-zhezlov":"Что в моём доме или круге заслуживает праздника?","pyaterka-zhezlov":"За что я спорю на самом деле?","shesterka-zhezlov":"Чью победу я не признаю — свою или чужую?","semerka-zhezlov":"Что своё я готов защищать, а что нет?","vosmerka-zhezlov":"Куда я медлю, хотя пора действовать?","devyatka-zhezlov":"Что помогает мне держаться, когда почти нет сил?","desyatka-zhezlov":"Что из моих обязанностей можно передать?","pazh-zhezlov":"Чему новому я хотел бы научиться?","rytsar-zhezlov":"Где мой порыв обгоняет моё понимание?","koroleva-zhezlov":"Где моя уверенность превращается в давление?","korol-zhezlov":"Куда я веду людей — и туда ли мне самому?","tuz-kubkov":"Что я боюсь почувствовать?","dvoyka-kubkov":"Что мы друг другу не говорим?","troyka-kubkov":"Кому я давно не говорил спасибо?","chetverka-kubkov":"Какое предложение жизни я не замечаю?","pyaterka-kubkov":"По чему я горюю дольше, чем стоит?","shesterka-kubkov":"Что из прошлого греет меня, а что держит?","semerka-kubkov":"Какая моя мечта так и останется мечтой?","vosmerka-kubkov":"Что пора оставить, даже если жаль?","devyatka-kubkov":"Чего я хочу сам — и не хотели ли этого за меня?","desyatka-kubkov":"Что я делаю для близких, а что только на словах?","pazh-kubkov":"Чего я стесняюсь в своей мягкости?","rytsar-kubkov":"Какое своё чувство я откладываю на потом?","koroleva-kubkov":"О ком я забочусь больше, чем о себе?","korol-kubkov":"Где мне нужно спокойствие вместо спора?","tuz-mechey":"Какую правду я знаю, но называю иначе?","dvoyka-mechey":"Какое решение я откладываю из страха ошибиться?","troyka-mechey":"Какую боль я не позволяю себе пережить до конца?","chetverka-mechey":"Когда я последний раз отдыхал по-настоящему?","pyaterka-mechey":"Какой спор я выиграю, но потеряю больше?","shesterka-mechey":"Что мне мешает перестать оглядываться назад?","semerka-mechey":"Где я обхожу правду в разговоре с собой?","vosmerka-mechey":"Какие мои ограничения живут только в голове?","devyatka-mechey":"Чего я боюсь на самом деле — факта или выдумки?","desyatka-mechey":"Что уже позади, даже если ещё больно?","pazh-mechey":"Какие вопросы я задаю, а какие боюсь задать?","rytsar-mechey":"Где я бью прямо там, где можно договориться?","koroleva-mechey":"Какие границы мне давно пора обозначить?","korol-mechey":"Где мне мешает не отсутствие ответа, а отсутствие решения?","tuz-pentakley":"Какую возможность я не беру, потому что «не сейчас»?","dvoyka-pentakley":"Что я пытаюсь удержать всё сразу?","troyka-pentakley":"У кого мне стоит поучиться делу?","chetverka-pentakley":"Что я держу из страха, а не из любви?","pyaterka-pentakley":"Почему я не прошу помощи, когда она рядом?","shesterka-pentakley":"Кому и как я помогаю — и не мешаю ли этим?","semerka-pentakley":"Чему я не даю времени вырасти?","vosmerka-pentakley":"Какое ремесло я хотел бы отточить?","devyatka-pentakley":"Что мешает мне радоваться тому, что уже есть?","desyatka-pentakley":"Что я строю такого, что переживёт меня?","pazh-pentakley":"С чего начать учиться тому, что важно?","rytsar-pentakley":"Где моя основательность превращается в застой?","koroleva-pentakley":"О чём простом я забыл — сон, тело, дом?","korol-pentakley":"Для чего мне на самом деле нужны деньги?"};window.TARO_DONATE={"title":"Спасибо за поддержку","subtitle":"Это по желанию — сайт работает для всех одинаково, ничего не продаётся","amounts":[0,100,300,500,1000,3000],"label":{"0":"Любая сумма"},"payLink":"https://vtb.paymo.ru/collect-money/qr/?transaction=c5175d82-6f5f-46c8-9d09-f9a4761ade7d","payLinkLabel":"Перевести благодарность","officialFile":"sbp-official.jpg","official":true,"ready":true};</script>
+<script src="/static/taro/assets/cards.js"></script>
+<script src="/static/taro/assets/app.js"></script>
+<script src="/static/taro/assets/moon.js" defer></script>
+</body>
+</html>
