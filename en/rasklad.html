@@ -58,12 +58,18 @@ html[data-bg]::before{
   <h1>Three-card tarot spread online</h1>
   <p class="lead">Ask an open question, choose a topic, and receive three cards read by position plus the whole picture.</p>
 
-  <p style="margin:26px 0">
-    <a class="btn" href="/taro/rasklad.html">Draw the cards (Russian interface)</a>
-    <a class="btn ghost" href="/taro/en/den.html">Daily reading</a>
-  </p>
+  <div class="panel" style="margin:26px 0">
+    <label>Topic</label>
+    <div class="chips" id="spread-topics"></div>
+    <label style="margin-top:18px;display:block">
+      <input type="checkbox" id="spread-reversed" style="width:auto;margin-right:8px">
+      Use reversed cards
+    </label>
+    <div class="hint">Beginners usually start without reversed cards.</div>
+    <p style="margin-top:20px"><button class="btn" id="spread-draw" type="button">Draw three cards</button></p>
+  </div>
+  <div id="spread-out"></div>
 
-  <p class="hint" style="margin:-8px 0 0">The interactive deck is in Russian — the reading itself works in any language.</p>
   <h2>What the positions mean</h2>
   <div class="table-scroll"><table>
     <tr><th>Topic</th><th>Card 1</th><th>Card 2</th><th>Card 3</th></tr>
@@ -99,9 +105,13 @@ html[data-bg]::before{
     <p class="hint">For entertainment and reflection only; not a substitute for medical, legal or psychological advice.</p>
   </div>
 </footer>
+<script src="/taro/assets/cards.js"></script>
+<script src="/taro/assets/cards.en.js"></script>
+<script src="/taro/assets/app-en.js"></script>
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
 
 
 
