@@ -1,4 +1,4 @@
-/* Круг Старшего Футарка — фон для немецкой версии. */
+/* Круг Старшего Футарка — фон немецкой версии. */
 #runes-bg{
   position:fixed;
   inset:0;
@@ -21,38 +21,16 @@
   filter:drop-shadow(0 0 8px rgba(216,178,106,.35)) drop-shadow(0 0 40px rgba(89,177,125,.18));
   user-select:none; -webkit-user-select:none;
 }
-@media (max-width:900px){
-  #runes-bg{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:center;
-  mix-blend-mode:screen;
-}
-#runes-bg .rn-inner{
-  width:min(50vw, 640px);
-  aspect-ratio:1;
-  opacity:.40;
-  display:flex; align-items:center; justify-content:center;
-  transform-style:preserve-3d;
-  will-change:transform;
-}
-}
-@media print{ #runes-bg{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:center;
-  mix-blend-mode:screen;
-}
-#runes-bg .rn-inner{
-  width:min(50vw, 640px);
-  aspect-ratio:1;
-  opacity:.40;
-  display:flex; align-items:center; justify-content:center;
-  transform-style:preserve-3d;
-  will-change:transform;
-} }
 
+/* контент выше фона, но шапка выше контента — иначе выпадающее меню прячется под страницей */
+header.site{ z-index:30 }
+main, footer.site{ position:relative; z-index:2 }
+
+@media (max-width:900px){
+  #runes-bg .rn-inner{
+    width:86vw;
+    opacity:.28;
+    transform-origin:50% 60%;
+  }
+}
+@media print{ #runes-bg{ display:none } }

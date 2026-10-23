@@ -21,58 +21,6 @@
   filter:drop-shadow(0 0 10px rgba(255,255,255,.35)) drop-shadow(0 0 40px rgba(190,200,255,.18));
   user-select:none; -webkit-user-select:none;
 }
-html.dyn-moon #dragon-bg{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:center;
-  mix-blend-mode:screen;
-}
-#dragon-bg .dg-inner{
-  width:min(50vw, 630px);
-  aspect-ratio:1;
-  opacity:.42;
-  display:flex; align-items:center; justify-content:center;
-  transform-style:preserve-3d;
-  will-change:transform;
-}
-@media (max-width:900px){
-  #dragon-bg{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:center;
-  mix-blend-mode:screen;
-}
-#dragon-bg .dg-inner{
-  width:min(50vw, 630px);
-  aspect-ratio:1;
-  opacity:.42;
-  display:flex; align-items:center; justify-content:center;
-  transform-style:preserve-3d;
-  will-change:transform;
-}
-}
-@media print{ #dragon-bg{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:center;
-  mix-blend-mode:screen;
-}
-#dragon-bg .dg-inner{
-  width:min(50vw, 630px);
-  aspect-ratio:1;
-  opacity:.42;
-  display:flex; align-items:center; justify-content:center;
-  transform-style:preserve-3d;
-  will-change:transform;
-} }
-
-
 
 /* на китайской версии фон — только дракон, без статичной луны */
 html[data-bg]::before{
@@ -82,29 +30,15 @@ html[data-bg]::before{
 }
 html.dyn-moon[data-bg]::before{ background-image:none !important }
 
-/* контент всегда выше дракона */
-header.site, main, footer.site{ position:relative; z-index:2 }
-#dragon-bg{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  display:flex; align-items:center; justify-content:center;
-  mix-blend-mode:screen;
+/* контент выше фона, но шапка выше контента — иначе выпадающее меню прячется под страницей */
+header.site{ z-index:30 }
+main, footer.site{ position:relative; z-index:2 }
+
+@media (max-width:900px){
+  #dragon-bg .dg-inner{
+    width:82vw;
+    opacity:.34;
+    transform-origin:50% 60%;
+  }
 }
-#dragon-bg .dg-inner{
-  width:min(50vw, 630px);
-  aspect-ratio:1;
-  opacity:.42;
-  display:flex; align-items:center; justify-content:center;
-  transform-style:preserve-3d;
-  will-change:transform;
-}
-
-
-/* панели чуть прозрачнее, чтобы дракон читался сквозь них */
-
-
-
-
-
+@media print{ #dragon-bg{ display:none } }
