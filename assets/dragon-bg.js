@@ -18,8 +18,17 @@
   var img = host.querySelector('img');
   if (!img) return;
 
+  /* внутренний слой: центрируется CSS, анимируется скриптом */
+  var inner = host.querySelector('.dg-inner');
+  if (!inner) {
+    inner = document.createElement('div');
+    inner.className = 'dg-inner';
+    host.appendChild(inner);
+    inner.appendChild(img);
+  }
+
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) { host.style.transform = 'scale(' + CFG.size + ')'; return; }
+  if (reduce) { inner.style.transform = 'scale(' + CFG.size + ')'; return; }
 
   var start = performance.now();
   function tick(now) {
@@ -28,10 +37,11 @@
     var rotY = Math.sin(t * 0.35) * 14 * CFG.tilt;
     var rotX = Math.sin(t * 0.27) * 6 * CFG.tilt;
     var z = Math.sin(t * 0.5) * 18 * CFG.tilt;
-    host.style.transform = 'rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg) translateZ(' + z.toFixed(1) + 'px) scale(' + CFG.size + ')';
+    inner.style.transform = 'rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg) translateZ(' + z.toFixed(1) + 'px) scale(' + CFG.size + ')';
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 })();
+
 
 

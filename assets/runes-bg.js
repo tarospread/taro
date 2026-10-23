@@ -15,6 +15,13 @@
   if (!host) return;
 
   var img = host.querySelector('img');
+  var inner = host.querySelector('.rn-inner');
+  if (img && !inner) {
+    inner = document.createElement('div');
+    inner.className = 'rn-inner';
+    host.appendChild(inner);
+    inner.appendChild(img);
+  }
   function applyGlow() {
     if (!img) return;
     var g = CFG.glow;
@@ -24,7 +31,7 @@
   }
   applyGlow();
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    host.style.transform = 'scale(' + CFG.size + ')';
+    (inner || host).style.transform = 'scale(' + CFG.size + ')';
     return;
   }
 
@@ -35,9 +42,10 @@
     var spin = t * 9 * CFG.spin;                       /* медленное вращение кольца */
     var ry = Math.sin(t * 0.3) * 14 * CFG.tilt;        /* покачивание в 3D */
     var rx = Math.sin(t * 0.23) * 6 * CFG.tilt;
-    host.style.transform = 'rotateY(' + ry.toFixed(2) + 'deg) rotateX(' + rx.toFixed(2) + 'deg) rotateZ(' + spin.toFixed(2) + 'deg) scale(' + CFG.size + ')';
+    (inner || host).style.transform = 'rotateY(' + ry.toFixed(2) + 'deg) rotateX(' + rx.toFixed(2) + 'deg) rotateZ(' + spin.toFixed(2) + 'deg) scale(' + CFG.size + ')';
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 })();
+
 
