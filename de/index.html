@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-bg="main">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,6 +12,16 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://tarospread.github.io/taro/zh/">
 <link rel="alternate" hreflang="x-default" href="https://tarospread.github.io/taro/">
 <link rel="stylesheet" href="/taro/assets/style.css">
+<link rel="stylesheet" href="/taro/assets/moon-bg.css">
+<style>
+/* фон для страниц в подпапке: путь к картинке делаем абсолютным */
+html[data-bg]::before{
+  content:''; position:fixed; inset:-40px; z-index:-1; pointer-events:none;
+  background-image:linear-gradient(rgba(9,7,15,0.45),rgba(9,7,15,0.45)),url(/taro/img/luna.jpg);
+  background-position:50% 40%,50% 40%; background-size:auto,cover; background-repeat:no-repeat,no-repeat;
+  filter:brightness(88%);
+}
+</style>
 <link rel="icon" href="/taro/assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="Tarot online legen — Stilles Deck">
 <meta property="og:description" content="Ruhiges Tarot online: Tageskarte, Drei-Karten-Legung mit Deutung nach Position und die Bedeutung aller 78 Karten. Kostenlos, ohne Anmeldung.">
@@ -29,6 +39,7 @@
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
+<div id="moon-bg" aria-hidden="true"></div>
 <header class="site">
   <div class="wrap">
     <div class="logo">Stilles Deck <span>· Tarot zum Nachdenken</span></div>
@@ -78,6 +89,8 @@
     <p class="hint">Nur zur Unterhaltung und Reflexion; kein Ersatz für professionellen Rat.</p>
   </div>
 </footer>
+<script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
 
