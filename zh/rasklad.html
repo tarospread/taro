@@ -58,10 +58,17 @@ html[data-bg]::before{
   <h1>在线三张牌塔罗牌阵</h1>
   <p class="lead">提出开放问题，选择主题，得到三张牌：按位置逐一解读，再给出整体画面。</p>
 
-  <p style="margin:26px 0">
-    <a class="btn" href="/taro/rasklad.html">开始抽牌（俄语界面）</a>
-    <a class="btn ghost" href="/taro/zh/den.html">每日占卜</a>
-  </p>
+  <div class="panel" style="margin:26px 0">
+    <label>Topic</label>
+    <div class="chips" id="spread-topics"></div>
+    <label style="margin-top:18px;display:block">
+      <input type="checkbox" id="spread-reversed" style="width:auto;margin-right:8px">
+      <span id="spread-reversed-text">Use reversed cards</span>
+    </label>
+    <div class="hint" id="spread-reversed-hint"></div>
+    <p style="margin-top:20px"><button class="btn" id="spread-draw" type="button" data-label="1"></button></p>
+  </div>
+  <div id="spread-out"></div>
 
   <p class="hint" style="margin:-8px 0 0">互动牌阵目前是俄语界面，占卜本身不限语言。</p>
   <h2>各位置的含义</h2>
@@ -99,9 +106,14 @@ html[data-bg]::before{
     <p class="hint">仅供娱乐与自我反思，不能替代医生、律师或心理咨询师的专业意见。</p>
   </div>
 </footer>
+<script src="/taro/assets/cards.js"></script>
+<script src="/taro/assets/cards.zh.js"></script>
+<script src="/taro/assets/app-i18n.js"></script>
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
+
 
 
 

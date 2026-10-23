@@ -63,10 +63,10 @@ html[data-bg]::before{
     <div class="chips" id="spread-topics"></div>
     <label style="margin-top:18px;display:block">
       <input type="checkbox" id="spread-reversed" style="width:auto;margin-right:8px">
-      Use reversed cards
+      <span id="spread-reversed-text">Use reversed cards</span>
     </label>
-    <div class="hint">Beginners usually start without reversed cards.</div>
-    <p style="margin-top:20px"><button class="btn" id="spread-draw" type="button">Draw three cards</button></p>
+    <div class="hint" id="spread-reversed-hint">Beginners usually start without reversed cards.</div>
+    <p style="margin-top:20px"><button class="btn" id="spread-draw" type="button" data-label="1">Draw three cards</button></p>
   </div>
   <div id="spread-out"></div>
 
@@ -107,10 +107,12 @@ html[data-bg]::before{
 </footer>
 <script src="/taro/assets/cards.js"></script>
 <script src="/taro/assets/cards.en.js"></script>
-<script src="/taro/assets/app-en.js"></script>
+<script src="/taro/assets/app-i18n.js"></script>
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
+
 
 
 

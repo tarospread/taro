@@ -58,10 +58,17 @@ html[data-bg]::before{
   <h1>Drei-Karten-Tarotlegung online</h1>
   <p class="lead">Stellen Sie eine offene Frage, wählen Sie ein Thema — Sie erhalten drei Karten, gedeutet nach Position und im Gesamtbild.</p>
 
-  <p style="margin:26px 0">
-    <a class="btn" href="/taro/rasklad.html">Karten legen (russische Oberfläche)</a>
-    <a class="btn ghost" href="/taro/de/den.html">Tageslegung</a>
-  </p>
+  <div class="panel" style="margin:26px 0">
+    <label>Topic</label>
+    <div class="chips" id="spread-topics"></div>
+    <label style="margin-top:18px;display:block">
+      <input type="checkbox" id="spread-reversed" style="width:auto;margin-right:8px">
+      <span id="spread-reversed-text">Use reversed cards</span>
+    </label>
+    <div class="hint" id="spread-reversed-hint"></div>
+    <p style="margin-top:20px"><button class="btn" id="spread-draw" type="button" data-label="1"></button></p>
+  </div>
+  <div id="spread-out"></div>
 
   <p class="hint" style="margin:-8px 0 0">Das interaktive Deck ist auf Russisch — die Legung selbst funktioniert in jeder Sprache.</p>
   <h2>Was die Positionen bedeuten</h2>
@@ -99,9 +106,14 @@ html[data-bg]::before{
     <p class="hint">Nur zur Unterhaltung und Reflexion; kein Ersatz für medizinischen, rechtlichen oder psychologischen Rat.</p>
   </div>
 </footer>
+<script src="/taro/assets/cards.js"></script>
+<script src="/taro/assets/cards.de.js"></script>
+<script src="/taro/assets/app-i18n.js"></script>
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
+
 
 
 

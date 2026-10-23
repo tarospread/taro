@@ -57,10 +57,7 @@ html[data-bg]::before{
 <main class="wrap">
   <h1>Tarot online legen — kostenlos, ruhig, ohne Vorhersagen</h1>
   <p class="lead">Eine Karte für den Tag, eine Drei-Karten-Legung für eine echte Frage und die Bedeutung aller 78 Karten. Keine Werbung, kein „Schicksal", kein Druck — nur ein Spiegel zum Nachdenken.</p>
-  <p style="margin:26px 0">
-    <a class="btn" href="/taro/">Tageskarte öffnen</a>
-    <a class="btn ghost" href="/taro/de/rasklad.html">Drei-Karten-Legung</a>
-  </p>
+  <div id="day-card-i18n" style="margin:26px 0 8px"></div>
   <p class="hint" style="margin:-8px 0 0">Das interaktive Deck ist auf Russisch — die Legung selbst funktioniert in jeder Sprache.</p>
   <h2>Was diese Seite ist</h2>
   <p>Ein stilles Tarotdeck ohne Konto, ohne Abo und ohne Verkaufsdruck. Die Tageskarte ist für alle Besucher gleich und wechselt einmal am Tag. Die Drei-Karten-Legung ist persönlich: eine Frage, drei Positionen, eine Deutung, zu der man zurückkehren kann.</p>
@@ -90,9 +87,13 @@ html[data-bg]::before{
     <p class="hint">Nur zur Unterhaltung und Reflexion; kein Ersatz für professionellen Rat.</p>
   </div>
 </footer>
+<script src="/taro/assets/cards.js"></script>
+<script src="/taro/assets/cards.de.js"></script>
+<script src="/taro/assets/app-i18n.js"></script>
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
 
 
 
