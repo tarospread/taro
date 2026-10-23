@@ -34,8 +34,12 @@
     <div class="logo">Stilles Deck <span>· Tarot zum Nachdenken</span></div>
     <nav class="main">
       <a href="/taro/de/">Tageskarte</a><a href="/taro/de/rasklad.html">Drei Karten</a><a href="/taro/de/den.html">Tageslegung</a>
-      <a href="/taro/de/">DE</a>
-      <a href="/taro/">RU</a>
+      <select class="lang-select" aria-label="Язык сайта" onchange="if(this.value) location.href=this.value">
+        <option value="/taro/">Русский</option>
+        <option value="/taro/en/">English</option>
+        <option value="/taro/de/" selected>Deutsch</option>
+        <option value="/taro/zh/">中文</option>
+      </select>
     </nav>
   </div>
 </header>
@@ -79,3 +83,4 @@
 </footer>
 </body>
 </html>
+

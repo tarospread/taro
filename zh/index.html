@@ -34,8 +34,12 @@
     <div class="logo">安静牌阵 <span>· 用于思考的塔罗</span></div>
     <nav class="main">
       <a href="/taro/zh/">今日一牌</a><a href="/taro/zh/rasklad.html">三张牌</a><a href="/taro/zh/den.html">每日占卜</a>
-      <a href="/taro/zh/">中文</a>
-      <a href="/taro/">RU</a>
+      <select class="lang-select" aria-label="Язык сайта" onchange="if(this.value) location.href=this.value">
+        <option value="/taro/">Русский</option>
+        <option value="/taro/en/">English</option>
+        <option value="/taro/de/">Deutsch</option>
+        <option value="/taro/zh/" selected>中文</option>
+      </select>
     </nav>
   </div>
 </header>
@@ -76,3 +80,4 @@
 </footer>
 </body>
 </html>
+

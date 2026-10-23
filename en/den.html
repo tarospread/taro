@@ -34,8 +34,12 @@
     <div class="logo">Quiet Deck <span>· tarot for reflection</span></div>
     <nav class="main">
       <a href="/taro/en/">Daily card</a><a href="/taro/en/rasklad.html">Three-card spread</a><a href="/taro/en/den.html">Daily reading</a>
-      <a href="/taro/en/">EN</a>
-      <a href="/taro/">RU</a>
+      <select class="lang-select" aria-label="Язык сайта" onchange="if(this.value) location.href=this.value">
+        <option value="/taro/">Русский</option>
+        <option value="/taro/en/" selected>English</option>
+        <option value="/taro/de/">Deutsch</option>
+        <option value="/taro/zh/">中文</option>
+      </select>
     </nav>
   </div>
 </header>
@@ -79,3 +83,4 @@
 </footer>
 </body>
 </html>
+
