@@ -1,7 +1,7 @@
 /* Фон с драконом для китайской версии (белый контур на ночном фоне). */
 #dragon-bg{
   position:fixed;
-  right:11vw; bottom:4vh;
+  right:-14vw; bottom:4vh;
   width:min(50vw, 630px);
   aspect-ratio:1;
   z-index:1;
@@ -44,6 +44,7 @@ header.site, main, footer.site{ position:relative; z-index:2 }
 
 
 /* панели чуть прозрачнее, чтобы дракон читался сквозь них */
+
 
 
 

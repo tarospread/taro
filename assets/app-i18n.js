@@ -146,8 +146,7 @@
       setTimeout(function () {
         face.style.opacity = '';
         face.style.transform = '';
-        /* рубашка видна ~0,55 с, затем карта переворачивается */
-        setTimeout(function () { face.classList.add('flipped'); }, 550);
+        /* карта остаётся рубашкой к зрителю: переворачивается только по нажатию */
       }, 120 + i * 140);
     });
 
@@ -314,6 +313,7 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
 
 
 
