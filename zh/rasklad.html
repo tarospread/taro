@@ -21,7 +21,16 @@ html[data-bg]::before{
   background-position:50% 40%,50% 40%; background-size:auto,cover; background-repeat:no-repeat,no-repeat;
   filter:brightness(88%);
 }
-</style>
+
+/* когда работает 3D-луна, статичную картинку убираем (иначе она перекрывает сцену) */
+html.dyn-moon[data-bg]::before{
+  background-image:linear-gradient(180deg, rgba(9,7,15,.88) 0%, rgba(9,7,15,.46) 34%, rgba(9,7,15,.58) 72%, rgba(9,7,15,.72) 100%) !important;
+}
+@media (max-width:820px){
+  html.dyn-moon[data-bg]::before{
+    background-image:linear-gradient(180deg, rgba(9,7,15,.95) 0%, rgba(9,7,15,.82) 30%, rgba(9,7,15,.62) 62%, rgba(9,7,15,.78) 100%) !important;
+  }
+}</style>
 <link rel="icon" href="/taro/assets/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="三张牌塔罗牌阵">
 <meta property="og:description" content="三张牌牌阵：过去–现在–未来、处境–阻碍–建议、关系、工作与金钱。免费，逐张解读并给出整体画面。">
@@ -44,14 +53,41 @@ html[data-bg]::before{
   <div class="wrap">
     <div class="logo">安静牌阵 <span>· 用于思考的塔罗</span></div>
     <nav class="main">
-      <a href="/taro/zh/">今日一牌</a><a href="/taro/zh/rasklad.html">三张牌</a><a href="/taro/zh/den.html">每日占卜</a>
-      <select class="lang-select" aria-label="Язык сайта" onchange="if(this.value) location.href=this.value">
-        <option value="/taro/" title="Русский">RU</option>
-        <option value="/taro/en/" title="English">EN</option>
-        <option value="/taro/de/" title="Deutsch">DE</option>
-        <option value="/taro/zh/" title="中文" selected>中文</option>
-      </select>
-    </nav>
+    <a href="/taro/zh/">今日一牌</a>
+    <div class="nav-item">
+      <button class="nav-toggle" type="button" aria-expanded="false">牌阵</button>
+      <div class="nav-panel">
+        <a href="/taro/zh/san-zhang.html">三张牌</a>
+        <a href="/taro/zh/kaierte-shizi.html">凯尔特十字</a>
+        <a href="/taro/zh/guanxi.html">关系</a>
+        <a href="/taro/zh/jingzi.html">镜子</a>
+        <a href="/taro/zh/lujing.html">路径</a>
+        <a href="/taro/zh/san-ge-zhidian.html">三个支点</a>
+        <a href="/taro/zh/niandu.html">年度（12）</a>
+        <a href="/taro/zh/rasklad.html">全部牌阵</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-toggle" type="button" aria-expanded="false">牌义</button>
+      <div class="nav-panel">
+        <a href="/taro/zh/karty.html">全部 78 张</a>
+        <a href="/taro/zh/karty.html#majors">大牌</a>
+        <a href="/taro/zh/karty.html#wands">权杖</a>
+        <a href="/taro/zh/karty.html#cups">圣杯</a>
+        <a href="/taro/zh/karty.html#swords">宝剑</a>
+        <a href="/taro/zh/karty.html#pentacles">星币</a>
+      </div>
+    </div>
+    <a href="/taro/zh/blog.html">文章</a>
+    <a href="/taro/zh/legend.html">传说</a>
+    <a href="/taro/zh/thanks.html">致谢</a>
+    <select class="lang-select" aria-label="语言" onchange="if(this.value) location.href=this.value">
+      <option value="/taro/">RU</option>
+      <option value="/taro/en/">EN</option>
+      <option value="/taro/de/">DE</option>
+      <option value="/taro/zh/" selected>ZH</option>
+    </select>
+  </nav>
   </div>
 </header>
 <main class="wrap">
@@ -145,6 +181,8 @@ html[data-bg]::before{
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
+
 
 
 

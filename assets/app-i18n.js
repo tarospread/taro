@@ -97,6 +97,7 @@
 
     var back = el('div', 'flip-side back');
     var backCard = el('div', 'card card-back');
+    backCard.style.cssText = 'background:linear-gradient(160deg,#2a2340,#191428);border:1px solid #4a3f6b;border-radius:10px';
     var backImg = el('img', 'face');
     backImg.src = ASSETS + 'backs/classic.svg';
     backImg.alt = '';
@@ -145,7 +146,8 @@
       setTimeout(function () {
         face.style.opacity = '';
         face.style.transform = '';
-        setTimeout(function () { face.classList.add('flipped'); }, 120);
+        /* рубашка видна ~0,55 с, затем карта переворачивается */
+        setTimeout(function () { face.classList.add('flipped'); }, 550);
       }, 120 + i * 140);
     });
 
@@ -312,6 +314,7 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
 
 
 

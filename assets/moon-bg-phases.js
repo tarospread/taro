@@ -33,8 +33,42 @@
     de: { lat: 52.52, lon: 13.40 },   /* Берлин */
     zh: { lat: 39.90, lon: 116.40 }   /* Пекин */
   };
+  /* город по часовому поясу браузера: вид луны должен быть «здесь и сейчас» */
+  var TZ = {
+    'Europe/Kaliningrad': [54.71, 20.51], 'Europe/Moscow': [55.75, 37.62],
+    'Europe/Kirov': [58.60, 49.66], 'Europe/Volgograd': [48.71, 44.51],
+    'Europe/Astrakhan': [46.35, 48.04], 'Europe/Saratov': [51.53, 46.03],
+    'Europe/Ulyanovsk': [54.32, 48.40], 'Europe/Samara': [53.20, 50.15],
+    'Asia/Yekaterinburg': [56.84, 60.61], 'Asia/Omsk': [54.99, 73.37],
+    'Asia/Novosibirsk': [55.03, 82.92], 'Asia/Barnaul': [53.35, 83.78],
+    'Asia/Tomsk': [56.50, 84.97], 'Asia/Krasnoyarsk': [56.01, 92.87],
+    'Asia/Irkutsk': [52.29, 104.28], 'Asia/Chita': [52.03, 113.50],
+    'Asia/Yakutsk': [62.03, 129.73], 'Asia/Vladivostok': [43.12, 131.89],
+    'Asia/Magadan': [59.56, 150.80], 'Asia/Kamchatka': [53.02, 158.65],
+    'Europe/Kiev': [50.45, 30.52], 'Europe/Minsk': [53.90, 27.57],
+    'Asia/Almaty': [43.24, 76.89], 'Asia/Tbilisi': [41.72, 44.79],
+    'Asia/Yerevan': [40.18, 44.51], 'Asia/Baku': [40.41, 49.87],
+    'Europe/London': [51.51, -0.13], 'Europe/Berlin': [52.52, 13.40],
+    'Europe/Paris': [48.86, 2.35], 'Europe/Madrid': [40.42, -3.70],
+    'America/New_York': [40.71, -74.01], 'America/Los_Angeles': [34.05, -118.24],
+    'Asia/Shanghai': [31.23, 121.47], 'Asia/Beijing': [39.90, 116.40],
+    'Asia/Hong_Kong': [22.32, 114.17], 'Asia/Taipei': [25.03, 121.57],
+    'Asia/Singapore': [1.35, 103.82], 'Asia/Tokyo': [35.68, 139.69]
+  };
   var langCode = (document.documentElement.lang || 'ru').slice(0, 2).toLowerCase();
   var place = PLACES[langCode] || PLACES.ru;
+
+  /* приоритет: ?lat&lon → часовой пояс браузера → язык страницы */
+  try {
+    var tzName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tzName && TZ[tzName]) {
+      place = { lat: TZ[tzName][0], lon: TZ[tzName][1] };
+    } else if (tzName && /^Asia|^Europe|^America/.test(tzName)) {
+      /* незнакомый пояс — берём широту по языку, долготу по смещению */
+      var off = -new Date().getTimezoneOffset() / 60;
+      place = { lat: place.lat, lon: Math.max(-180, Math.min(180, off * 15)) };
+    }
+  } catch (e) {}
   var qs = (function () { try { return new URLSearchParams(location.search); } catch (e) { return null; } })();
   CONFIG.lat = (qs && qs.has('lat')) ? Number(qs.get('lat')) : (CONFIG.lat || place.lat);
   CONFIG.lon = (qs && qs.has('lon')) ? Number(qs.get('lon')) : (CONFIG.lon || place.lon);
@@ -273,6 +307,7 @@
       earthSpin.scale.setScalar(Math.min(dist * 0.10 * k, 0.42 * Math.min(halfW, halfH)));
       earthTilt.rotation.z = CONFIG.tilt * Math.PI / 180;
       earthPivot.visible = !!CONFIG.earth && aspect >= CONFIG.earthMinAspect;
+      host.dataset.earth = earthPivot.visible ? ('on ' + earthPivot.position.x.toFixed(2) + ',' + earthPivot.position.y.toFixed(2) + ' r=' + earthSpin.scale.x.toFixed(2)) : 'off';
     }
     frame();
     window.addEventListener('resize', frame);
@@ -313,6 +348,8 @@
     })();
     }).catch(function (e) { document.documentElement.setAttribute('data-moon-error', String((e && e.message) || e)); });
 })();
+
+
 
 
 
