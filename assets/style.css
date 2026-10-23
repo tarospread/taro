@@ -708,3 +708,75 @@ nav.main .lang-select, nav .lang-select{
 }
 
 .chip.on{border-color:var(--gold);color:#14101d;background:var(--gold)}
+
+/* ===== меню: одинаковая высота кнопок, язык — отдельно ===== */
+nav.main > a, .nav-toggle, .nav-thanks{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:42px;
+  padding:0 14px;
+  box-sizing:border-box;
+  white-space:nowrap;
+  line-height:1;
+}
+nav.main{align-items:center; gap:12px}
+nav.main .nav-item{display:inline-flex; height:42px}
+nav.main .nav-item > .nav-toggle{height:42px}
+nav.main .lang-select{
+  margin-left:18px !important;
+  align-self:center;
+  height:38px !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+  border-color:#4a3f6b;
+}
+@media (max-width:700px){
+  nav.main > a, .nav-toggle, .nav-thanks{
+    height:38px; padding:0 11px; font-size:13px;
+  }
+  nav.main .nav-item{height:38px}
+  nav.main .lang-select{margin-left:auto !important; height:34px !important}
+}
+
+/* ===== финальная вычитка высоты меню (перекрывает всё выше) ===== */
+nav.main > a,
+nav.main .nav-toggle,
+nav.main .nav-thanks{ height:42px !important; min-height:42px !important; display:inline-flex !important; align-items:center; justify-content:center; white-space:nowrap; }
+nav.main .nav-item{ height:42px !important; }
+nav.main .nav-item > .nav-toggle{ height:42px !important; }
+nav.main .lang-select{ height:38px !important; min-height:0 !important; margin-left:18px !important; }
+
+@media (max-width:700px){
+  nav.main > a,
+  nav.main .nav-toggle,
+  nav.main .nav-thanks{ height:36px !important; min-height:36px !important; padding:0 10px !important; font-size:13px !important; }
+  nav.main .nav-item{ height:36px !important; }
+  nav.main .lang-select{ height:32px !important; margin-left:auto !important; }
+}
+
+/* ===== язык: отдельно справа, в полтора-два раза уже кнопок ===== */
+nav.main .lang-select{
+  width:64px !important;
+  min-width:64px !important;
+  max-width:64px !important;
+  margin-left:104px !important;
+  padding-left:10px !important;
+  padding-right:22px !important;
+  text-align:left;
+  height:38px !important;
+}
+@media (max-width:1200px){
+  nav.main .lang-select{ margin-left:64px !important; }
+}
+@media (max-width:900px){
+  nav.main .lang-select{ margin-left:24px !important; }
+}
+@media (max-width:700px){
+  nav.main .lang-select{
+    width:58px !important; min-width:58px !important; max-width:58px !important;
+    height:32px !important; margin-left:auto !important;
+  }
+  nav.main .nav-item > .nav-toggle{ height:36px !important; min-height:36px !important; }
+}
+

@@ -9,11 +9,11 @@
 (function () {
   var CONFIG = {
     date: 'auto',      /* 'auto' — сегодняшняя дата; или '2026-09-04' — зафиксировать фазу */
-    floor: 0,          /* минимальная освещённость, 0…0.8; 0 — «честная» фаза, в новолуние луна тёмная */
-    relief: 1,         /* резкость рельефа: 0…2 */
+    floor: 0.10,       /* минимальная освещённость: тоньше серп не станет */
+    relief: 0.1,       /* резкость рельефа: 0…2; 0.1 — мягкий, «фотографический» */
     mspin: 35,         /* скорость вращения луны: 0 — стоит, 100 — быстро */
     earth: 1,          /* 1 — Земля за луной, 0 — без неё */
-    esize: 35,         /* размер Земли, % (15…80) */
+    esize: 80,         /* размер Земли, % (15…80) */
     tilt: 24.5,        /* наклон оси Земли, градусы */
     eday: 120,         /* секунд на один оборот Земли; 120 — «сутки» в ускоренном виде */
     coverLandscape: 0.70, /* доля высоты экрана, которую занимает луна на широком экране */
@@ -25,6 +25,19 @@
 
   var SYN = 29.530588853;
   var NEW_MOON = Date.UTC(2000, 0, 6, 18, 14);
+
+  /* ── откуда смотрим: страна задаётся языком страницы, можно переопределить ссылкой ?lat=&lon= ── */
+  var PLACES = {
+    ru: { lat: 59.94, lon: 30.31 },   /* Санкт-Петербург */
+    en: { lat: 51.51, lon: -0.13 },   /* Лондон */
+    de: { lat: 52.52, lon: 13.40 },   /* Берлин */
+    zh: { lat: 39.90, lon: 116.40 }   /* Пекин */
+  };
+  var langCode = (document.documentElement.lang || 'ru').slice(0, 2).toLowerCase();
+  var place = PLACES[langCode] || PLACES.ru;
+  var qs = (function () { try { return new URLSearchParams(location.search); } catch (e) { return null; } })();
+  CONFIG.lat = (qs && qs.has('lat')) ? Number(qs.get('lat')) : (CONFIG.lat || place.lat);
+  CONFIG.lon = (qs && qs.has('lon')) ? Number(qs.get('lon')) : (CONFIG.lon || place.lon);
 
   var host = document.getElementById('moon-bg');
   if (!host) return;
@@ -42,6 +55,97 @@
     return p;
   }
 
+
+  /* ── астрономия: усечённые формулы Муса (точность ~1% по фазе) ── */
+  var RAD = Math.PI / 180;
+
+  function jdOf(date) { return date.getTime() / 86400000 + 2440587.5; }
+
+  function sunLon(T) {
+    var L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+    var M = 357.52911 + 35999.05029 * T - 0.0001537 * T * T;
+    var C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(M * RAD)
+          + (0.019993 - 0.000101 * T) * Math.sin(2 * M * RAD)
+          + 0.000289 * Math.sin(3 * M * RAD);
+    return (L0 + C) % 360;
+  }
+
+  function moonPos(T) {
+    var Lp = 218.3164477 + 481267.88123421 * T - 0.0015786 * T * T + T * T * T / 538841;
+    var D  = 297.8501921 + 445267.1114034 * T - 0.0018819 * T * T + T * T * T / 545868;
+    var M  = 357.5291092 + 35999.0502909 * T - 0.0001536 * T * T;
+    var Mp = 134.9633964 + 477198.8675055 * T + 0.0087414 * T * T + T * T * T / 69699;
+    var F  = 93.272095 + 483202.0175233 * T - 0.0036539 * T * T;
+    var d = D * RAD, m = M * RAD, mp = Mp * RAD, f = F * RAD;
+
+    var lon = Lp
+      + 6.289 * Math.sin(mp) + 1.274 * Math.sin(2 * d - mp) + 0.658 * Math.sin(2 * d)
+      + 0.214 * Math.sin(2 * mp) - 0.186 * Math.sin(m) - 0.114 * Math.sin(2 * f)
+      + 0.059 * Math.sin(2 * d - 2 * mp) + 0.057 * Math.sin(2 * d - m - mp)
+      + 0.053 * Math.sin(2 * d + mp) + 0.046 * Math.sin(2 * d - m)
+      + 0.041 * Math.sin(m - mp) - 0.035 * Math.sin(d) - 0.031 * Math.sin(m + mp)
+      - 0.015 * Math.sin(2 * f - 2 * d) + 0.011 * Math.sin(mp - 4 * d);
+
+    var lat = 5.128 * Math.sin(f) + 0.281 * Math.sin(mp + f) + 0.278 * Math.sin(mp - f)
+      + 0.173 * Math.sin(2 * d - f) + 0.055 * Math.sin(2 * d - mp + f)
+      + 0.046 * Math.sin(2 * d - mp - f) + 0.033 * Math.sin(2 * d + f)
+      + 0.017 * Math.sin(2 * mp + f);
+
+    var dist = 385000.56 - 20905 * Math.cos(mp) - 3699 * Math.cos(2 * d - mp)
+      - 2956 * Math.cos(2 * d) - 570 * Math.cos(2 * mp)
+      + 246 * Math.cos(2 * mp - 2 * d) - 205 * Math.cos(m - mp);
+
+    return { lon: ((lon % 360) + 360) % 360, lat: lat, dist: dist };
+  }
+
+  function equatorial(lonDeg, latDeg, epsDeg) {
+    var l = lonDeg * RAD, b = latDeg * RAD, e = epsDeg * RAD;
+    var ra = Math.atan2(Math.sin(l) * Math.cos(e) - Math.tan(b) * Math.sin(e), Math.cos(l));
+    var dec = Math.asin(Math.sin(b) * Math.cos(e) + Math.cos(b) * Math.sin(e) * Math.sin(l));
+    return { ra: ((ra / RAD) % 360 + 360) % 360, dec: dec / RAD };
+  }
+
+  function gmst(jd) {
+    var T = (jd - 2451545) / 36525;
+    var g = 280.46061837 + 360.98564736629 * (jd - 2451545) + 0.000387933 * T * T;
+    return ((g % 360) + 360) % 360;
+  }
+
+  function moonView(date, lat, lon) {
+    var jd = jdOf(date);
+    var T = (jd - 2451545) / 36525;
+    var eps = 23.4392911 - 0.0130042 * T;
+
+    var sEq = equatorial(sunLon(T), 0, eps);
+    var mp = moonPos(T);
+    var mEq = equatorial(mp.lon, mp.lat, eps);
+
+    var cosPsi = Math.sin(mEq.dec * RAD) * Math.sin(sEq.dec * RAD)
+      + Math.cos(mEq.dec * RAD) * Math.cos(sEq.dec * RAD) * Math.cos((mEq.ra - sEq.ra) * RAD);
+    cosPsi = Math.max(-1, Math.min(1, cosPsi));
+    var psi = Math.acos(cosPsi) / RAD;
+
+    var dRa = (mEq.ra - sEq.ra) * RAD;
+    var chi = Math.atan2(
+      Math.cos(sEq.dec * RAD) * Math.sin(dRa),
+      Math.sin(sEq.dec * RAD) * Math.cos(mEq.dec * RAD) - Math.cos(sEq.dec * RAD) * Math.sin(mEq.dec * RAD) * Math.cos(dRa)
+    ) / RAD;
+
+    var lst = gmst(jd) + lon;
+    var H = ((lst - mEq.ra) % 360 + 360) % 360;
+    var q = Math.atan2(
+      Math.sin(H * RAD),
+      Math.tan(lat * RAD) * Math.cos(mEq.dec * RAD) - Math.sin(mEq.dec * RAD) * Math.cos(H * RAD)
+    ) / RAD;
+
+    return {
+      illum: (1 - Math.cos(psi * RAD)) / 2,
+      psi: psi,
+      tilt: ((chi - q) % 360 + 360) % 360,
+      distance: mp.dist,
+      sizeFactor: 385000 / mp.dist
+    };
+  }
   import('https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js').then(function (THREE) {
     var wide = (window.innerWidth || 1200) >= 1100;
     var anisoMax = 8;
@@ -158,28 +262,39 @@
 
       /* Земля: позади справа, всё в долях расстояния — композиция не зависит от экрана */
       var k = (CONFIG.esize / 100) / 0.45;
+      /* Земля ставится в долях видимой половины кадра — не уезжает за край при любом размере */
+      var halfH = dist * Math.tan(fov * Math.PI / 360);
+      var halfW = halfH * aspect;
       earthPivot.position.set(
-        moon.position.x + 0.74 * dist,
-        moon.position.y + 0.42 * dist,
+        moon.position.x + 0.62 * halfW,
+        moon.position.y + 0.34 * halfH,
         -1.6 * dist
       );
-      earthSpin.scale.setScalar(dist * 0.10 * k);
+      earthSpin.scale.setScalar(Math.min(dist * 0.10 * k, 0.42 * Math.min(halfW, halfH)));
       earthTilt.rotation.z = CONFIG.tilt * Math.PI / 180;
       earthPivot.visible = !!CONFIG.earth && aspect >= CONFIG.earthMinAspect;
     }
     frame();
     window.addEventListener('resize', frame);
 
-    /* ── Фаза по дате ── */
+    /* ── Фаза по эфемеридам (упрощённые формулы Муса) ── */
     var when = CONFIG.date === 'auto' ? new Date() : new Date(CONFIG.date + 'T12:00:00');
-    var phase = phaseFromDate(when);
-    var ang = phase * Math.PI * 2;
-    var illum = (1 - Math.cos(ang)) / 2;
-    if (CONFIG.floor > 0 && illum < CONFIG.floor) {
-      var minAng = Math.acos(1 - 2 * CONFIG.floor);
-      ang = (ang < Math.PI) ? minAng : (Math.PI * 2 - minAng);
+    var view = moonView(when, CONFIG.lat, CONFIG.lon);
+
+    /* угол фазы: 0 — полная, 180° — новолуние */
+    var alpha = Math.PI - view.psi * Math.PI / 180;
+    if (CONFIG.floor > 0 && view.illum < CONFIG.floor) {
+      alpha = Math.acos(Math.max(-1, Math.min(1, 2 * CONFIG.floor - 1)));
     }
-    sun.position.set(Math.sin(ang) * 5, 0.6, -Math.cos(ang) * 5);
+
+    /* наклон яркого лимба: 0° — вверх, 90° — вправо (как видно с выбранной широты) */
+    var theta = (90 - view.tilt) * Math.PI / 180;
+    var sinA = Math.sin(alpha);
+    sun.position.set(sinA * Math.cos(theta) * 5, sinA * Math.sin(theta) * 5, Math.cos(alpha) * 5);
+
+    /* видимый размер: меняется на ±5% в зависимости от расстояния до Луны */
+    var sizeFactor = Math.max(0.94, Math.min(1.06, view.sizeFactor));
+    moon.scale.setScalar(sizeFactor);
 
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var clock = new THREE.Clock();
@@ -196,8 +311,13 @@
       renderer.render(scene, camera);
       if (!started) { started = true; enable(); }
     })();
-  }).catch(function () { /* остаётся статичная луна */ });
+    }).catch(function (e) { document.documentElement.setAttribute('data-moon-error', String((e && e.message) || e)); });
 })();
+
+
+
+
+
 
 
 
