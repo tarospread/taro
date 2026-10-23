@@ -103,7 +103,7 @@
     scene.add(earthPivot);
 
     loader.load(
-      'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r161/examples/textures/planets/' + (wide ? 'earth_atmos_4096.jpg' : 'earth_atmos_2048.jpg'),
+      BASE + 'earth_atmos_4096.jpg',
       function (t) {
         t.colorSpace = THREE.SRGBColorSpace;
         t.anisotropy = Math.min(16, anisoMax);
@@ -182,5 +182,6 @@
     })();
   }).catch(function () { /* остаётся статичная луна */ });
 })();
+
 
 
