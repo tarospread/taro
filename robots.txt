@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://vmilyakov-dev.github.io/taro/sitemap.xml
+Sitemap: https://tarospread.github.io/taro/sitemap.xml
+
 
 
 
