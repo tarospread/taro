@@ -15,7 +15,10 @@
     earth: 1,          /* 1 — Земля за луной, 0 — без неё */
     esize: 35,         /* размер Земли, % (15…80) */
     tilt: 24.5,        /* наклон оси Земли, градусы */
-    eday: 120          /* секунд на один оборот Земли; 120 — «сутки» в ускоренном виде */
+    eday: 120,         /* секунд на один оборот Земли; 120 — «сутки» в ускоренном виде */
+    coverLandscape: 0.70, /* доля высоты экрана, которую занимает луна на широком экране */
+    coverPortrait: 0.62,  /* то же для телефона в вертикальном положении */
+    earthMinAspect: 0.9   /* уже (уже экран) — Земля не показывается */
   };
 
   var SYN = 29.530588853;
@@ -102,7 +105,8 @@
     earthPivot.visible = !!CONFIG.earth;
     scene.add(earthPivot);
 
-    loader.load(
+    var wantEarth = !!CONFIG.earth && (window.innerWidth || 1200) / (window.innerHeight || 800) >= CONFIG.earthMinAspect;
+    if (wantEarth) loader.load(
       BASE + 'earth_atmos_4096.jpg',
       function (t) {
         t.colorSpace = THREE.SRGBColorSpace;
@@ -127,7 +131,7 @@
       var h = host.clientHeight || window.innerHeight;
       var aspect = w / h;
 
-      var cover = aspect < 1 ? 0.88 : 0.70;
+      var cover = aspect < 1 ? CONFIG.coverPortrait : CONFIG.coverLandscape;
       var fov = 32;
       dist = 1 / (cover * Math.tan(fov * Math.PI / 360));
 
@@ -138,7 +142,7 @@
       camera.updateProjectionMatrix();
 
       renderer.setSize(w, h, false);
-      moon.position.set(aspect < 1 ? 0 : -0.02, aspect < 1 ? -0.34 : 0.12, 0);
+      moon.position.set(aspect < 1 ? 0 : -0.02, aspect < 1 ? -0.06 : 0.12, 0);
       moon.scale.setScalar(1);
 
       /* Земля: позади справа, всё в долях расстояния — композиция не зависит от экрана */
@@ -150,6 +154,7 @@
       );
       earthSpin.scale.setScalar(dist * 0.10 * k);
       earthTilt.rotation.z = CONFIG.tilt * Math.PI / 180;
+      earthPivot.visible = !!CONFIG.earth && aspect >= CONFIG.earthMinAspect;
     }
     frame();
     window.addEventListener('resize', frame);
@@ -182,6 +187,7 @@
     })();
   }).catch(function () { /* остаётся статичная луна */ });
 })();
+
 
 
 
