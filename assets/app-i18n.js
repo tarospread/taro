@@ -162,8 +162,14 @@
     if (btn) btn.textContent = T.drawBtn;
     if (!out || !btn || !DECK.length) return;
 
-    var current = 0;
+    /* на отдельной странице расклад зафиксирован: window.SPREAD_DEFAULT = индекс */
+    var current = (typeof window.SPREAD_DEFAULT === 'number') ? window.SPREAD_DEFAULT : 0;
+    var fixed = (typeof window.SPREAD_DEFAULT === 'number');
 
+    if (kind && fixed) {
+      kind.style.display = 'none';
+      if (kindLabel) kindLabel.style.display = 'none';
+    }
     if (kind) {
       T.spreads.forEach(function (s, i) {
         var o = document.createElement('option');
@@ -234,6 +240,7 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
 
 
 

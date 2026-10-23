@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="__LANG__" data-bg="rasklad">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
+<link rel="canonical" href="__CANON__">
+__ALT__
+<link rel="stylesheet" href="/taro/assets/style.css">
+<link rel="stylesheet" href="/taro/assets/moon-bg.css">
+<link rel="icon" href="/taro/assets/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"__H1__","inLanguage":"__LANG__"}</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(113733436, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113733436" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="moon-bg" aria-hidden="true"></div>
+__HEADER__
+<main class="wrap">
+  <h1>__H1__</h1>
+  <p class="lead">__LEAD__</p>
+
+  <div class="panel" style="margin:26px 0">
+    <label id="spread-kind-label">__SPREADLABEL__</label>
+    <select id="spread-kind" class="spread-select"></select>
+    <label style="margin-top:16px;display:block">
+      <input type="checkbox" id="spread-reversed" style="width:auto;margin-right:8px">
+      <span id="spread-reversed-text">__REV__</span>
+    </label>
+    <div class="hint" id="spread-reversed-hint">__REVHINT__</div>
+    <p style="margin-top:20px"><button class="btn" id="spread-draw" type="button">__DRAW__</button></p>
+  </div>
+  <div id="spread-out"></div>
+
+  <h2>__POSITIONS_TITLE__</h2>
+  <div class="table-scroll"><table>
+    <tr><th>#</th><th>__POSWORD__</th></tr>
+__ROWS__
+  </table></div>
+
+  <h2>__HOW_TITLE__</h2>
+  <p>__HOW__</p>
+
+  <p class="disclaimer">__DISCLAIMER__</p>
+</main>
+__FOOTER__
+<script>window.SPREAD_DEFAULT=__IDX__;</script>
+<script src="/taro/assets/cards.js"></script>
+<script src="/taro/assets/cards.__LANGSHORT__.js"></script>
+<script src="/taro/assets/app-i18n.js"></script>
+<script src="/taro/assets/moon-bg-phases.js" defer></script>
+</body>
+</html>
