@@ -91,29 +91,43 @@ html.dyn-moon[data-bg]::before{
   </div>
 </header>
 <main class="wrap">
-  <h1>在线塔罗占卜 — 免费、安静，不预测命运</h1>
-  <p class="lead">每天一张牌，为真实问题抽三张牌，以及全部 78 张牌的牌义。没有广告，不卖"命运"，不施加压力 — 只是一面用来思考的镜子。</p>
-  <div id="day-card-i18n" style="margin:26px 0 8px"></div>
-  
-  <h2>这是什么</h2>
-  <p>一副安静的塔罗牌，无需注册、没有订阅、没有推销。今日一牌对所有访客相同，每天更换一次。三张牌牌阵是个人的：一个问题、三个位置、一段可以回看的解读。</p>
-  <p>我们使用 Rider–Waite–Smith 牌组（1909 年）。牌义用于反思，而不是算命：牌指出主题，怎么做由你决定。</p>
-  <h2>三种开始方式</h2>
-  <div class="table-scroll"><table>
-    <tr><th>方式</th><th>适合什么时候</th><th>显示什么</th></tr>
-    <tr><td>今日一牌</td><td>每天早上，两分钟</td><td>这一天的基调，一个值得留意的主题</td></tr>
-    <tr><td>三张牌牌阵</td><td>有具体问题时</td><td>过去–现在–未来，或 处境–阻碍–建议</td></tr>
-    <tr><td>每日占卜</td><td>想养成习惯时</td><td>怎么问、怎么读、不该做什么</td></tr>
-  </table></div>
-  <h2>怎么提问</h2>
-  <p>开放式问题有效，是/否问题无效。"关于这次谈话，我需要明白什么？"能让牌有东西可答。"他会打电话吗？"只会把你的期待还给你。</p>
-  <h2>常见问题</h2>
-  <div class="panel">
-    <p><b>免费吗？</b><br>是的。无需注册，没有付费牌阵。</p>
-    <p><b>会保存我的问题吗？</b><br>不会。问题只留在你的浏览器里，只统计匿名访问数据。</p>
-    <p><b>可以用逆位牌吗？</b><br>可以，有开关。初学者通常先不用逆位。</p>
+  <h1>今日一牌</h1>
+  <p class="lead">一张牌陪你一整天——不必反复抽。看看今天在焦点上的是哪种能量，它给出什么建议。</p>
+
+  <div class="grid c2" style="align-items:start">
+    <div id="day-card-i18n" class="slot"></div>
+    <div class="panel">
+      <p class="hint" style="margin-top:0">今日一牌对所有访客相同，每天更换一次。解读只是思考的理由，不是判决。</p>
+    </div>
   </div>
-  <p class="disclaimer">仅供娱乐与自我反思，不能替代医生、律师或心理咨询师的专业意见。</p>
+
+  <div class="grid c3" style="margin-top:34px">
+    <a class="panel" href="/taro/zh/den.html" style="display:block">
+      <h3 style="margin-top:0">每日塔罗占卜</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">一天一张牌：怎么提问、怎么阅读，以及不喜欢这张牌时该怎么做。</p>
+    </a>
+    <a class="panel" href="/taro/zh/rasklad.html" style="display:block">
+      <h3 style="margin-top:0">三张牌牌阵</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">提出一个开放的问题——按三个位置解读，并给出整体画面。</p>
+    </a>
+    <a class="panel" href="/taro/zh/karty.html" style="display:block">
+      <h3 style="margin-top:0">78 张牌的牌义</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">大牌与小牌：正位与逆位、牌的建议，以及爱情、工作与金钱。</p>
+    </a>
+    <a class="panel" href="/taro/zh/blog.html" style="display:block">
+      <h3 style="margin-top:0">如何向牌提问</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">塔罗最重要的能力：答案的大半取决于问题的提法。</p>
+    </a>
+    <a class="panel" href="/taro/zh/kaierte-shizi.html" style="display:block">
+      <h3 style="margin-top:0">凯尔特十字</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">十张牌的大牌阵，用于复杂处境：过去、阻碍、环境、恐惧与结果。</p>
+    </a>
+  </div>
+
+  <p class="hint" style="margin-top:14px">全部牌阵： <a href="/taro/zh/rasklad.html">三张牌、凯尔特十字、年度（12 张）、关系、镜子与路径</a>.</p>
+
+  <h2>为什么这样设计</h2>
+  <p>这里的塔罗不是预言必然。牌指出主题和注意力方向，决定始终在你自己手里。所以这副牌很安静：没有喧哗，没有“命运”，没有压力——只是一面用来思考的镜子。</p>
 </main>
 <footer class="site">
   <div class="wrap">
@@ -131,6 +145,7 @@ html.dyn-moon[data-bg]::before{
 <script src="/taro/assets/lang-switch.js" defer></script>
 </body>
 </html>
+
 
 
 

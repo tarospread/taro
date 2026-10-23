@@ -91,31 +91,43 @@ html.dyn-moon[data-bg]::before{
   </div>
 </header>
 <main class="wrap">
-  <h1>Tarot reading online — free, quiet, without predictions</h1>
-  <p class="lead">One card for the day, a three-card spread for a real question, and the meanings of all 78 cards. No advertising, no "fate", no pressure — just a mirror for thinking.</p>
-  <div id="day-card-i18n" style="margin:26px 0 8px"></div>
-  <p style="margin:0 0 26px">
-    <a class="btn ghost" href="/taro/en/rasklad.html">Three-card spread</a>
-  </p>
-  <h2>What this site is</h2>
-  <p>A quiet tarot deck with no account, no subscription and no upsell. The daily card is the same for every visitor and changes once a day. The three-card spread is individual: a question, three positions, a reading you can come back to.</p>
-  <p>We use the Rider–Waite–Smith deck (1909). Meanings are written for reflection, not for fortune-telling: a card names a theme, and you decide what to do with it.</p>
-  <h2>Three ways to start</h2>
-  <div class="table-scroll"><table>
-    <tr><th>Format</th><th>When it fits</th><th>What it shows</th></tr>
-    <tr><td>Card of the day</td><td>Every morning, two minutes</td><td>The tone of the day, one theme to notice</td></tr>
-    <tr><td>Three-card spread</td><td>A concrete question</td><td>Past–present–future, or situation–obstacle–advice</td></tr>
-    <tr><td>Daily reading</td><td>When you want a habit</td><td>How to ask, how to read, what not to do</td></tr>
-  </table></div>
-  <h2>How to ask a question</h2>
-  <p>Open questions work, yes/no questions do not. "What do I need to understand about this conversation?" gives a card something to answer. "Will he call?" only gives you your own wish back.</p>
-  <h2>Frequently asked</h2>
-  <div class="panel">
-    <p><b>Is it free?</b><br>Yes. No registration, no paid spreads.</p>
-    <p><b>Do you store my questions?</b><br>No. The question stays in your browser; only anonymous visit statistics are collected.</p>
-    <p><b>Can I use reversed cards?</b><br>Yes, there is a switch. Beginners usually start without them.</p>
+  <h1>Card of the day</h1>
+  <p class="lead">One card for the whole day — no re-drawing. See which energy is in focus today and what it advises.</p>
+
+  <div class="grid c2" style="align-items:start">
+    <div id="day-card-i18n" class="slot"></div>
+    <div class="panel">
+      <p class="hint" style="margin-top:0">The card of the day is the same for every visitor and changes once a day. A reading is a reason to think, not a verdict.</p>
+    </div>
   </div>
-  <p class="disclaimer">For entertainment and reflection only. It does not replace advice from a doctor, lawyer or psychologist.</p>
+
+  <div class="grid c3" style="margin-top:34px">
+    <a class="panel" href="/taro/en/den.html" style="display:block">
+      <h3 style="margin-top:0">Daily tarot reading</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">One card for a day: how to ask, how to read, and what to do if you dislike the card.</p>
+    </a>
+    <a class="panel" href="/taro/en/rasklad.html" style="display:block">
+      <h3 style="margin-top:0">Three-card spread</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Ask an open question and get a reading by three positions plus the whole picture.</p>
+    </a>
+    <a class="panel" href="/taro/en/karty.html" style="display:block">
+      <h3 style="margin-top:0">Meanings of 78 cards</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Major and Minor Arcana: upright and reversed, the advice of each card, love, work and money.</p>
+    </a>
+    <a class="panel" href="/taro/en/blog.html" style="display:block">
+      <h3 style="margin-top:0">How to ask the cards</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">The main skill in tarot: most of the answer depends on how the question is put.</p>
+    </a>
+    <a class="panel" href="/taro/en/celtic-cross.html" style="display:block">
+      <h3 style="margin-top:0">Celtic Cross</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">A big ten-card spread for a complex situation: past, obstacle, environment, fears and outcome.</p>
+    </a>
+  </div>
+
+  <p class="hint" style="margin-top:14px">All spreads: <a href="/taro/en/rasklad.html">three cards, Celtic Cross, year ahead (12), relationships, Mirror and Path</a>.</p>
+
+  <h2>Why it works this way</h2>
+  <p>Tarot here is not a prediction of the inevitable. A card names a theme and a direction of attention; the decision stays with you. That is why the deck is quiet: no shouting, no “fate”, no pressure — only a mirror for thinking.</p>
 </main>
 <footer class="site">
   <div class="wrap">
@@ -132,6 +144,7 @@ html.dyn-moon[data-bg]::before{
 <script src="/taro/assets/lang-switch.js" defer></script>
 </body>
 </html>
+
 
 
 

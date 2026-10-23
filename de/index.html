@@ -91,29 +91,43 @@ html.dyn-moon[data-bg]::before{
   </div>
 </header>
 <main class="wrap">
-  <h1>Tarot online legen — kostenlos, ruhig, ohne Vorhersagen</h1>
-  <p class="lead">Eine Karte für den Tag, eine Drei-Karten-Legung für eine echte Frage und die Bedeutung aller 78 Karten. Keine Werbung, kein „Schicksal", kein Druck — nur ein Spiegel zum Nachdenken.</p>
-  <div id="day-card-i18n" style="margin:26px 0 8px"></div>
-  
-  <h2>Was diese Seite ist</h2>
-  <p>Ein stilles Tarotdeck ohne Konto, ohne Abo und ohne Verkaufsdruck. Die Tageskarte ist für alle Besucher gleich und wechselt einmal am Tag. Die Drei-Karten-Legung ist persönlich: eine Frage, drei Positionen, eine Deutung, zu der man zurückkehren kann.</p>
-  <p>Wir nutzen das Rider-Waite-Smith-Deck (1909). Die Deutungen sind zum Nachdenken gedacht: Eine Karte benennt ein Thema, und Sie entscheiden, was daraus wird.</p>
-  <h2>Drei Wege zu beginnen</h2>
-  <div class="table-scroll"><table>
-    <tr><th>Format</th><th>Wann es passt</th><th>Was es zeigt</th></tr>
-    <tr><td>Tageskarte</td><td>Jeden Morgen, zwei Minuten</td><td>Den Ton des Tages, ein Thema zum Achten</td></tr>
-    <tr><td>Drei-Karten-Legung</td><td>Bei einer konkreten Frage</td><td>Vergangenheit–Gegenwart–Zukunft oder Situation–Hindernis–Rat</td></tr>
-    <tr><td>Tageslegung</td><td>Wenn Sie eine Gewohnheit wollen</td><td>Wie fragen, wie lesen, was man nicht tun sollte</td></tr>
-  </table></div>
-  <h2>Wie man fragt</h2>
-  <p>Offene Fragen funktionieren, Ja/Nein-Fragen nicht. „Was sollte ich über dieses Gespräch verstehen?" gibt der Karte etwas zu antworten. „Ruft er an?" gibt Ihnen nur Ihren eigenen Wunsch zurück.</p>
-  <h2>Häufige Fragen</h2>
-  <div class="panel">
-    <p><b>Ist es kostenlos?</b><br>Ja. Keine Anmeldung, keine bezahlten Legungen.</p>
-    <p><b>Werden meine Fragen gespeichert?</b><br>Nein. Die Frage bleibt im Browser; gesammelt werden nur anonyme Besuchsstatistiken.</p>
-    <p><b>Gehen auch umgekehrte Karten?</b><br>Ja, es gibt einen Schalter. Anfänger beginnen meist ohne.</p>
+  <h1>Tageskarte</h1>
+  <p class="lead">Eine Karte für den ganzen Tag — ohne Nachlegen. Sehen Sie, welche Energie heute im Fokus steht und was sie rät.</p>
+
+  <div class="grid c2" style="align-items:start">
+    <div id="day-card-i18n" class="slot"></div>
+    <div class="panel">
+      <p class="hint" style="margin-top:0">Die Tageskarte ist für alle Besucher gleich und wechselt einmal am Tag. Eine Deutung ist ein Anlass zum Nachdenken, kein Urteil.</p>
+    </div>
   </div>
-  <p class="disclaimer">Nur zur Unterhaltung und Reflexion. Kein Ersatz für Rat von Arzt, Anwalt oder Psychologen.</p>
+
+  <div class="grid c3" style="margin-top:34px">
+    <a class="panel" href="/taro/de/den.html" style="display:block">
+      <h3 style="margin-top:0">Tageslegung Tarot</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Eine Karte für einen Tag: wie fragen, wie lesen und was tun, wenn die Karte nicht gefällt.</p>
+    </a>
+    <a class="panel" href="/taro/de/rasklad.html" style="display:block">
+      <h3 style="margin-top:0">Drei-Karten-Legung</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Stellen Sie eine offene Frage — Sie erhalten eine Deutung nach drei Positionen und das Gesamtbild.</p>
+    </a>
+    <a class="panel" href="/taro/de/karty.html" style="display:block">
+      <h3 style="margin-top:0">Bedeutung der 78 Karten</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Große und Kleine Arkana: aufrecht und umgekehrt, Rat der Karte, Liebe, Arbeit und Geld.</p>
+    </a>
+    <a class="panel" href="/taro/de/blog.html" style="display:block">
+      <h3 style="margin-top:0">Wie man die Karten fragt</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Die wichtigste Fähigkeit im Tarot: Der größte Teil der Antwort hängt von der Frage ab.</p>
+    </a>
+    <a class="panel" href="/taro/de/keltisches-kreuz.html" style="display:block">
+      <h3 style="margin-top:0">Keltisches Kreuz</h3>
+      <p style="font-size:15px;color:var(--muted);margin:0">Eine große Legung mit zehn Karten für eine komplexe Lage: Vergangenheit, Hindernis, Umfeld, Ängste und Ergebnis.</p>
+    </a>
+  </div>
+
+  <p class="hint" style="margin-top:14px">Alle Legungen: <a href="/taro/de/rasklad.html">drei Karten, Keltisches Kreuz, Jahreslegung (12), Beziehung, Spiegel und Weg</a>.</p>
+
+  <h2>Warum es so funktioniert</h2>
+  <p>Tarot ist hier keine Vorhersage des Unvermeidlichen. Eine Karte benennt ein Thema und eine Richtung der Aufmerksamkeit; die Entscheidung bleibt bei Ihnen. Darum ist das Deck still: kein Geschrei, kein Schicksal, kein Druck — nur ein Spiegel zum Nachdenken.</p>
 </main>
 <footer class="site">
   <div class="wrap">
@@ -130,6 +144,8 @@ html.dyn-moon[data-bg]::before{
 <script src="/taro/assets/lang-switch.js" defer></script>
 </body>
 </html>
+
+
 
 
 
