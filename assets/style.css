@@ -684,3 +684,25 @@ nav.main .lang-select, nav .lang-select{
   padding:6px 24px 6px 9px !important;
 }
 
+
+/* ===== мобильная шапка: меню переносится, список языков — отдельной строкой ===== */
+@media (max-width:700px){
+  header.site .wrap{flex-wrap:wrap; row-gap:8px}
+  nav.main{
+    flex-wrap:wrap; width:100%; margin-left:0; gap:8px 10px;
+    overflow:visible;
+  }
+  nav.main > a, .nav-toggle{
+    font-size:13px;
+    padding:7px 11px;
+  }
+  nav.main .lang-select{
+    order:99;
+    margin:4px 0 0 auto !important;
+    min-width:96px !important;
+    max-width:130px !important;
+    font-size:12.5px !important;
+    padding:5px 22px 5px 9px !important;
+  }
+  body{overflow-x:hidden}
+}
