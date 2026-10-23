@@ -254,7 +254,7 @@
         earthMat.map = t; earthMat.needsUpdate = true;
       },
       undefined,
-      function () { earthPivot.visible = false; }   /* не загрузилась — просто убираем Землю */
+      function (e) { earthPivot.visible = false; host.dataset.earthError = 'load fail ' + ((e && (e.message || e.type)) || 'unknown'); }   /* не загрузилась — просто убираем Землю */
     );
 
     /* ── Свет: положение солнца задаёт фазу ── */
@@ -299,15 +299,21 @@
       /* Земля ставится в долях видимой половины кадра — не уезжает за край при любом размере */
       var halfH = dist * Math.tan(fov * Math.PI / 360);
       var halfW = halfH * aspect;
+      /* Земля далеко за луной: половину кадра считаем на её глубине, иначе уезжает за край или прячется под текстом */
+      var earthDepth = 2.6 * dist;
+      var halfHe = earthDepth * Math.tan(fov * Math.PI / 360);
+      var halfWe = halfHe * aspect;
       earthPivot.position.set(
-        moon.position.x + 0.62 * halfW,
-        moon.position.y + 0.34 * halfH,
+        moon.position.x + 0.66 * halfWe,
+        moon.position.y + 0.46 * halfHe,
         -1.6 * dist
       );
-      earthSpin.scale.setScalar(Math.min(dist * 0.10 * k, 0.42 * Math.min(halfW, halfH)));
+      earthSpin.scale.setScalar(Math.min(0.30 * halfHe, dist * 0.12 * k));
       earthTilt.rotation.z = CONFIG.tilt * Math.PI / 180;
       earthPivot.visible = !!CONFIG.earth && aspect >= CONFIG.earthMinAspect;
-      host.dataset.earth = earthPivot.visible ? ('on ' + earthPivot.position.x.toFixed(2) + ',' + earthPivot.position.y.toFixed(2) + ' r=' + earthSpin.scale.x.toFixed(2)) : 'off';
+      if (earthMat.map) {
+      } else {
+      }
     }
     frame();
     window.addEventListener('resize', frame);
@@ -329,9 +335,7 @@
 
     /* видимый размер: меняется на ±5% в зависимости от расстояния до Луны */
     var sizeFactor = Math.max(0.94, Math.min(1.06, view.sizeFactor));
-    moon.scale.setScalar(sizeFactor);
-
-    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    moon.scale.setScalar(sizeFactor);    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var clock = new THREE.Clock();
     var started = false;
 
@@ -348,6 +352,16 @@
     })();
     }).catch(function (e) { document.documentElement.setAttribute('data-moon-error', String((e && e.message) || e)); });
 })();
+
+
+
+
+
+
+
+
+
+
 
 
 
