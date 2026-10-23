@@ -9,52 +9,60 @@
       dayLabel: 'Card of the day',
       dayBtn: 'Reveal today’s card',
       advice: 'Advice: ',
-      drawBtn: 'Draw three cards',
+      drawBtn: 'Draw the cards',
+      spreadLabel: 'Spread',
       reversed: 'Use reversed cards',
       reversedHint: 'Beginners usually start without reversed cards.',
       again: 'Ask a different question — or draw again tomorrow.',
-      topics: [
-        { label: 'General situation', pos: ['Past', 'Present', 'Future'] },
-        { label: 'What to do', pos: ['Situation', 'Obstacle', 'Advice'] },
-        { label: 'Relationships', pos: ['You', 'Partner', 'What is between you'] },
-        { label: 'Work and money', pos: ['Now', 'What blocks', 'Where it leads'] },
-        { label: 'Me and my goal', pos: ['What blocks', 'My resource', 'First step'] }
+      spreads: [
+        { name: 'Three cards — past, present, future', pos: ['Past', 'Present', 'Future'] },
+        { name: 'Celtic Cross — 10 cards', pos: ['Situation', 'Obstacle', 'Foundation', 'Recent past', 'Possibility', 'Near future', 'Your position', 'Environment', 'Hopes and fears', 'Outcome'] },
+        { name: 'Relationships — 5 cards', pos: ['You', 'Partner', 'Strength', 'Weakness', 'Perspective'] },
+        { name: 'Mirror — 4 cards', pos: ['How others see you', 'What is inside', 'Strengths', 'Growth zone'] },
+        { name: 'Path — 7 cards', pos: ['Cause', 'Experience', 'Baggage', 'Now', 'Near prospect', 'Middle prospect', 'Far prospect'] },
+        { name: 'Three supports — body, work, soul', pos: ['Body', 'Work', 'Soul'] },
+        { name: 'Year ahead — 12 cards', pos: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] }
       ]
     },
     de: {
       dayLabel: 'Tageskarte',
       dayBtn: 'Heutige Karte aufdecken',
       advice: 'Rat: ',
-      drawBtn: 'Drei Karten legen',
+      drawBtn: 'Karten legen',
+      spreadLabel: 'Legung',
       reversed: 'Umgekehrte Karten verwenden',
       reversedHint: 'Anfänger beginnen meist ohne umgekehrte Karten.',
       again: 'Stellen Sie eine andere Frage — oder legen Sie morgen wieder.',
-      topics: [
-        { label: 'Allgemeine Lage', pos: ['Vergangenheit', 'Gegenwart', 'Zukunft'] },
-        { label: 'Was tun', pos: ['Situation', 'Hindernis', 'Rat'] },
-        { label: 'Beziehung', pos: ['Sie', 'Partner', 'Was zwischen Ihnen steht'] },
-        { label: 'Arbeit und Geld', pos: ['Jetzt', 'Was blockiert', 'Wohin es führt'] },
-        { label: 'Ich und mein Ziel', pos: ['Was blockiert', 'Meine Ressource', 'Erster Schritt'] }
+      spreads: [
+        { name: 'Drei Karten — Vergangenheit, Gegenwart, Zukunft', pos: ['Vergangenheit', 'Gegenwart', 'Zukunft'] },
+        { name: 'Keltisches Kreuz — 10 Karten', pos: ['Situation', 'Hindernis', 'Fundament', 'Jüngste Vergangenheit', 'Möglichkeit', 'Nahe Zukunft', 'Ihre Position', 'Umfeld', 'Hoffnungen und Ängste', 'Ergebnis'] },
+        { name: 'Beziehung — 5 Karten', pos: ['Sie', 'Partner', 'Stärke', 'Schwäche', 'Perspektive'] },
+        { name: 'Spiegel — 4 Karten', pos: ['Wie man Sie sieht', 'Was innen ist', 'Stärken', 'Wachstumszone'] },
+        { name: 'Weg — 7 Karten', pos: ['Ursache', 'Erfahrung', 'Gepäck', 'Jetzt', 'Nahe Perspektive', 'Mittlere Perspektive', 'Ferne Perspektive'] },
+        { name: 'Drei Stützen — Körper, Werk, Seele', pos: ['Körper', 'Werk', 'Seele'] },
+        { name: 'Jahreslegung — 12 Karten', pos: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'] }
       ]
     },
     zh: {
       dayLabel: '今日一牌',
       dayBtn: '翻开今日牌',
       advice: '建议：',
-      drawBtn: '抽三张牌',
+      drawBtn: '开始抽牌',
+      spreadLabel: '牌阵',
       reversed: '使用逆位牌',
       reversedHint: '初学者通常先不用逆位。',
       again: '可以换一个问题，或者明天再抽。',
-      topics: [
-        { label: '整体处境', pos: ['过去', '现在', '未来'] },
-        { label: '该怎么做', pos: ['处境', '阻碍', '建议'] },
-        { label: '关系', pos: ['你', '对方', '你们之间'] },
-        { label: '工作与金钱', pos: ['现在', '什么在阻碍', '通向哪里'] },
-        { label: '我与目标', pos: ['什么在阻碍', '我的资源', '第一步'] }
+      spreads: [
+        { name: '三张牌 — 过去、现在、未来', pos: ['过去', '现在', '未来'] },
+        { name: '凯尔特十字 — 10 张', pos: ['处境', '阻碍', '根基', '近期过去', '可能性', '近期未来', '你的立场', '环境', '希望与恐惧', '结果'] },
+        { name: '关系 — 5 张', pos: ['你', '对方', '优势', '弱点', '前景'] },
+        { name: '镜子 — 4 张', pos: ['别人如何看你', '你的内在', '优势', '成长区'] },
+        { name: '路径 — 7 张', pos: ['原因', '经验', '包袱', '现在', '近期', '中期', '远期'] },
+        { name: '三个支点 — 身体、事业、心灵', pos: ['身体', '事业', '心灵'] },
+        { name: '年度 — 12 张', pos: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'] }
       ]
     }
   };
-
   function langKey() {
     var l = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
     if (l.indexOf('zh') === 0) return 'zh';
@@ -140,48 +148,67 @@
   }
 
   function initSpread() {
+    var kind = document.getElementById('spread-kind');
     var chips = document.getElementById('spread-topics');
     var out = document.getElementById('spread-out');
     var btn = document.getElementById('spread-draw');
     var rev = document.getElementById('spread-reversed');
     var revLabel = document.getElementById('spread-reversed-text');
     var revHint = document.getElementById('spread-reversed-hint');
+    var kindLabel = document.getElementById('spread-kind-label');
     if (revLabel) revLabel.textContent = T.reversed;
     if (revHint) revHint.textContent = T.reversedHint;
-    if (!chips || !out || !btn || !DECK.length) return;
-    if (btn.dataset.label) { btn.textContent = T.drawBtn; }
+    if (kindLabel) kindLabel.textContent = T.spreadLabel;
+    if (btn) btn.textContent = T.drawBtn;
+    if (!out || !btn || !DECK.length) return;
 
-    var topic = T.topics[0];
+    var current = 0;
 
-    T.topics.forEach(function (t, idx) {
-      var b = el('button', 'chip' + (idx === 0 ? ' on' : ''), t.label);
-      b.type = 'button';
-      b.onclick = function () {
-        topic = t;
-        Array.prototype.forEach.call(chips.children, function (c) { c.classList.remove('on'); });
-        b.classList.add('on');
-      };
-      chips.appendChild(b);
-    });
+    if (kind) {
+      T.spreads.forEach(function (s, i) {
+        var o = document.createElement('option');
+        o.value = String(i);
+        o.textContent = s.name;
+        kind.appendChild(o);
+      });
+      kind.onchange = function () { current = Number(kind.value) || 0; };
+    } else if (chips) {
+      T.spreads.forEach(function (s, i) {
+        var b = el('button', 'chip' + (i === 0 ? ' on' : ''), s.name);
+        b.type = 'button';
+        b.onclick = function () {
+          current = i;
+          Array.prototype.forEach.call(chips.children, function (c) { c.classList.remove('on'); });
+          b.classList.add('on');
+        };
+        chips.appendChild(b);
+      });
+    }
 
     btn.onclick = function () {
       out.innerHTML = '';
-      var deck = shuffle(DECK).slice(0, 3);
+      var spread = T.spreads[current];
+      var count = spread.pos.length;
+      var deck = shuffle(DECK).slice(0, count);
       var useRev = !!(rev && rev.checked);
+
+      var head = el('p', 'hint', spread.name);
+      head.style.cssText = 'margin:18px 0 0;color:var(--gold-soft)';
+      out.appendChild(head);
 
       deck.forEach(function (card, i) {
         var reversed = useRev && Math.random() < 0.4;
         var c = info(card);
 
         var box = el('div', 'panel');
-        box.style.cssText = 'margin-top:14px;padding:18px 20px';
+        box.style.cssText = 'margin-top:12px;padding:16px 18px';
 
-        var pos = el('p', 'hint', (i + 1) + ' · ' + topic.pos[i]);
+        var pos = el('p', 'hint', (i + 1) + ' · ' + spread.pos[i]);
         pos.style.margin = '0 0 4px';
         box.appendChild(pos);
 
         var h = el('h3', '', c.name + (reversed ? ' (↺)' : ''));
-        h.style.cssText = 'margin:0 0 8px;font-size:19px;color:var(--gold)';
+        h.style.cssText = 'margin:0 0 8px;font-size:18px;color:var(--gold)';
         box.appendChild(h);
 
         var p = el('p', '', reversed ? c.shadow : c.essence);
@@ -202,10 +229,11 @@
       out.appendChild(again);
     };
   }
-
   function init() { initDay(); initSpread(); }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+
 

@@ -59,8 +59,8 @@ html[data-bg]::before{
   <p class="lead">Ask an open question, choose a topic, and receive three cards read by position plus the whole picture.</p>
 
   <div class="panel" style="margin:26px 0">
-    <label>Topic</label>
-    <div class="chips" id="spread-topics"></div>
+    <label id="spread-kind-label">Spread</label>
+    <select id="spread-kind" class="spread-select"></select>
     <label style="margin-top:18px;display:block">
       <input type="checkbox" id="spread-reversed" style="width:auto;margin-right:8px">
       <span id="spread-reversed-text">Use reversed cards</span>
@@ -111,6 +111,7 @@ html[data-bg]::before{
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
 </body>
 </html>
+
 
 
 
