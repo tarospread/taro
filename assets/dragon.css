@@ -1,10 +1,10 @@
 /* Фон с драконом для китайской версии (белый контур на ночном фоне). */
 #dragon-bg{
   position:fixed;
-  right:1vw; bottom:-6vh;
-  width:min(46vw, 580px);
+  right:11vw; bottom:4vh;
+  width:min(50vw, 630px);
   aspect-ratio:1;
-  z-index:-1;
+  z-index:1;
   pointer-events:none;
   opacity:.42;
   transform-style:preserve-3d;
@@ -37,3 +37,14 @@ html[data-bg]::before{
   filter:none !important;
 }
 html.dyn-moon[data-bg]::before{ background-image:none !important }
+
+/* контент всегда выше дракона */
+header.site, main, footer.site{ position:relative; z-index:2 }
+#dragon-bg{ mix-blend-mode: screen }
+
+
+/* панели чуть прозрачнее, чтобы дракон читался сквозь них */
+
+
+
+

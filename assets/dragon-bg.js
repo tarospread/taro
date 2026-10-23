@@ -2,7 +2,7 @@
    Настройки: mode white, tilt 0.55, size 0.60, speed 1.8 (утверждено владельцем).
    Рисунок: «Chinese black dragon», автор Angelus, CC BY-SA 3.0, Wikimedia Commons. */
 (function () {
-  var CFG = { tilt: 0.55, size: 0.60, speed: 1.8 };
+  var CFG = { tilt: 0.85, size: 0.70, speed: 1.8 };
 
   /* настройка ссылкой: ?tilt=0.7&size=0.5&speed=2 */
   try {
@@ -33,4 +33,5 @@
   }
   requestAnimationFrame(tick);
 })();
+
 
