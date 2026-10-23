@@ -17,7 +17,9 @@
     tilt: 24.5,        /* наклон оси Земли, градусы */
     eday: 120,         /* секунд на один оборот Земли; 120 — «сутки» в ускоренном виде */
     coverLandscape: 0.70, /* доля высоты экрана, которую занимает луна на широком экране */
-    coverPortrait: 0.62,  /* то же для телефона в вертикальном положении */
+    coverPortrait: 0.12,  /* то же для телефона: маленькая луна в небе */
+    portraitX: 0.42,      /* положение маленькой луны по горизонтали: -1 левый край … 1 правый */
+    portraitY: 0.66,      /* по вертикали: -1 низ … 1 верх */
     earthMinAspect: 0.9   /* уже (уже экран) — Земля не показывается */
   };
 
@@ -132,6 +134,8 @@
       var aspect = w / h;
 
       var cover = aspect < 1 ? CONFIG.coverPortrait : CONFIG.coverLandscape;
+      host.dataset.moonCover = cover.toFixed(2);   /* для проверки: сколько высоты занято */
+      host.dataset.moonAspect = aspect.toFixed(2);
       var fov = 32;
       dist = 1 / (cover * Math.tan(fov * Math.PI / 360));
 
@@ -142,7 +146,14 @@
       camera.updateProjectionMatrix();
 
       renderer.setSize(w, h, false);
-      moon.position.set(aspect < 1 ? 0 : -0.02, aspect < 1 ? -0.06 : 0.12, 0);
+      var halfH = dist * Math.tan(fov * Math.PI / 360);
+      var halfW = halfH * aspect;
+      if (aspect < 1) {
+        /* маленькая луна в небе: положение задаётся долями половины экрана */
+        moon.position.set(CONFIG.portraitX * halfW, CONFIG.portraitY * halfH, 0);
+      } else {
+        moon.position.set(-0.02, 0.12, 0);
+      }
       moon.scale.setScalar(1);
 
       /* Земля: позади справа, всё в долях расстояния — композиция не зависит от экрана */
@@ -187,6 +198,11 @@
     })();
   }).catch(function () { /* остаётся статичная луна */ });
 })();
+
+
+
+
+
 
 
 
