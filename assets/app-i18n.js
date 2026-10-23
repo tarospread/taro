@@ -85,6 +85,73 @@
     };
   }
 
+  var ASSETS = '/taro/assets/';
+
+  function cardFace(card, reversed) {
+    var wrap = el('div', 'flip');
+    wrap.setAttribute('tabindex', '0');
+    wrap.setAttribute('role', 'img');
+    wrap.setAttribute('aria-label', (info(card).name || ''));
+
+    var inner = el('div', 'flip-inner');
+
+    var back = el('div', 'flip-side back');
+    var backCard = el('div', 'card card-back');
+    var backImg = el('img', 'face');
+    backImg.src = ASSETS + 'backs/classic.svg';
+    backImg.alt = '';
+    backCard.appendChild(backImg);
+    back.appendChild(backCard);
+
+    var front = el('div', 'flip-side front');
+    var cardBox = el('div', 'card' + (reversed ? ' rev' : ''));
+    var img = el('img', 'face');
+    img.src = ASSETS + 'img/' + card.slug + '.jpg';
+    img.alt = info(card).name || '';
+    img.loading = 'lazy';
+    img.onerror = function () { this.style.display = 'none'; };
+    cardBox.appendChild(img);
+    front.appendChild(cardBox);
+
+    inner.appendChild(back);
+    inner.appendChild(front);
+    wrap.appendChild(inner);
+
+    wrap.onclick = function () { wrap.classList.toggle('flipped'); };
+    return wrap;
+  }
+
+  /* раскладка: карты вылетают по очереди и переворачиваются */
+  function dealRow(cards, reversedFlags, host, captions) {
+    var row = el('div', 'spread-grid');
+    row.style.cssText = 'display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 6px';
+
+    cards.forEach(function (card, i) {
+      var cell = el('div', '');
+      cell.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:8px;max-width:calc(var(--card-w) + 10px)';
+      var face = cardFace(card, reversedFlags[i]);
+      face.style.opacity = '0';
+      face.style.transform = 'translateY(14px) scale(.94)';
+      face.style.transition = 'opacity .25s ease, transform .35s cubic-bezier(.2,.75,.3,1)';
+      cell.appendChild(face);
+
+      if (captions && captions[i]) {
+        var cap = el('span', 'cap', captions[i]);
+        cap.style.cssText = 'font-size:12px;color:var(--muted);text-align:center;line-height:1.3';
+        cell.appendChild(cap);
+      }
+      row.appendChild(cell);
+
+      setTimeout(function () {
+        face.style.opacity = '';
+        face.style.transform = '';
+        setTimeout(function () { face.classList.add('flipped'); }, 120);
+      }, 120 + i * 140);
+    });
+
+    host.appendChild(row);
+    return row;
+  }
   function hashDate(d) {
     var s = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
     var h = 2166136261;
@@ -106,8 +173,9 @@
     var card = DECK[hashDate(new Date())];
     var c = info(card);
 
+    dealRow([card], [false], host, [T.dayLabel]);
     var face = el('div', 'panel');
-    face.style.cssText = 'max-width:420px;padding:22px 24px';
+    face.style.cssText = 'max-width:420px;padding:22px 24px;margin-top:6px';
 
     var h = el('h3', '', c.name);
     h.style.cssText = 'margin:0 0 6px;font-size:22px;color:var(--gold)';
@@ -202,8 +270,12 @@
       head.style.cssText = 'margin:18px 0 0;color:var(--gold-soft)';
       out.appendChild(head);
 
+      var flags = deck.map(function () { return useRev && Math.random() < 0.4; });
+      var captions = deck.map(function (card, i) { return (i + 1) + ' · ' + spread.pos[i]; });
+      dealRow(deck, flags, out, captions);
+
       deck.forEach(function (card, i) {
-        var reversed = useRev && Math.random() < 0.4;
+        var reversed = flags[i];
         var c = info(card);
 
         var box = el('div', 'panel');
@@ -240,6 +312,9 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+
+
 
 
 
