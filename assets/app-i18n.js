@@ -322,3 +322,48 @@
 
 
 
+
+/* ---------- меню с выпадающими подменю (нужно на переводах: app.js там не подключён) ---------- */
+(function () {
+  function initNav() {
+    var items = document.querySelectorAll('.nav-item');
+    if (!items.length) return;
+    var list = Array.prototype.slice.call(items);
+
+    function closeAll(except) {
+      list.forEach(function (item) {
+        if (item === except) return;
+        item.className = item.className.replace(/\s*open/, '');
+        var t = item.querySelector('.nav-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    list.forEach(function (item) {
+      var toggle = item.querySelector('.nav-toggle');
+      if (!toggle) return;
+      toggle.onclick = function (e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+        var willOpen = item.className.indexOf('open') < 0;
+        closeAll(item);
+        if (willOpen) {
+          item.className += ' open';
+          toggle.setAttribute('aria-expanded', 'true');
+        } else {
+          closeAll();
+        }
+      };
+      Array.prototype.forEach.call(item.querySelectorAll('.nav-panel a'), function (a) {
+        a.onclick = function () { closeAll(); };
+      });
+    });
+
+    document.onclick = function () { closeAll(); };
+    document.onkeydown = function (e) {
+      if ((e.key || '') === 'Escape' || e.keyCode === 27) closeAll();
+    };
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNav);
+  else initNav();
+})();
