@@ -29,3 +29,11 @@ html.dyn-moon #dragon-bg{ opacity:.48 }
 @media print{ #dragon-bg{ display:none } }
 
 
+
+/* на китайской версии фон — только дракон, без статичной луны */
+html[data-bg]::before{
+  background-image:
+    radial-gradient(60% 50% at 50% 40%, #141026 0%, #0a0712 55%, #07050b 100%) !important;
+  filter:none !important;
+}
+html.dyn-moon[data-bg]::before{ background-image:none !important }

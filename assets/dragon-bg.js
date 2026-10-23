@@ -4,6 +4,14 @@
 (function () {
   var CFG = { tilt: 0.55, size: 0.60, speed: 1.8 };
 
+  /* настройка ссылкой: ?tilt=0.7&size=0.5&speed=2 */
+  try {
+    var qs = new URLSearchParams(location.search);
+    if (qs.has('tilt')) CFG.tilt = Math.max(0, Math.min(1, Number(qs.get('tilt')) || 0));
+    if (qs.has('size')) CFG.size = Math.max(0.2, Math.min(1.4, Number(qs.get('size')) || 0.6));
+    if (qs.has('speed')) CFG.speed = Math.max(0, Math.min(4, Number(qs.get('speed')) || 1));
+  } catch (e) {}
+
   var host = document.getElementById('dragon-bg');
   if (!host) return;
 
@@ -25,3 +33,4 @@
   }
   requestAnimationFrame(tick);
 })();
+
