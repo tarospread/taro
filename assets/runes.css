@@ -1,0 +1,29 @@
+/* Круг Старшего Футарка — фон для немецкой версии. */
+#runes-bg{
+  position:fixed;
+  right:-6vw; bottom:-2vh;
+  width:min(50vw, 640px);
+  aspect-ratio:1;
+  z-index:1;
+  pointer-events:none;
+  opacity:.40;
+  display:flex; align-items:center; justify-content:center;
+  transform-style:preserve-3d;
+  will-change:transform;
+  mix-blend-mode:screen;
+}
+#runes-bg img{
+  width:100%; height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 0 8px rgba(216,178,106,.35)) drop-shadow(0 0 40px rgba(89,177,125,.18));
+  user-select:none; -webkit-user-select:none;
+}
+@media (max-width:900px){
+  #runes-bg{
+    width:86vw; right:auto; left:50%; top:auto; bottom:4vh;
+    margin-left:-43vw; transform-origin:50% 60%;
+    opacity:.28;
+  }
+}
+@media print{ #runes-bg{ display:none } }
+
