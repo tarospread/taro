@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://tarospread.github.io/taro/zh/文章—安静牌阵.html">
 
 <link rel="stylesheet" href="/taro/assets/style.css">
+<link rel="stylesheet" href="/taro/assets/dragon.css">
 <link rel="stylesheet" href="/taro/assets/moon-bg.css">
 <style>
 html[data-bg]::before{content:'';position:fixed;inset:-40px;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(9,7,15,.45),rgba(9,7,15,.45)),url(/taro/img/luna.jpg);background-position:50% 40%,50% 40%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;filter:brightness(88%)}
@@ -16,6 +17,7 @@ html.dyn-moon[data-bg]::before{background-image:linear-gradient(180deg, rgba(9,7
 <link rel="icon" href="/taro/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
+<div id="dragon-bg" aria-hidden="true"><img src="/taro/assets/dragon.svg" alt=""></div>
 <div id="moon-bg" aria-hidden="true"></div>
 <header class="site"><div class="wrap"><div class="logo">安静牌阵 <span>· 用于思考的塔罗</span></div>
 <nav class="main">
@@ -47,7 +49,7 @@ html.dyn-moon[data-bg]::before{background-image:linear-gradient(180deg, rgba(9,7
     <a href="/taro/zh/blog.html">文章</a>
     <a href="/taro/zh/legend.html">传说</a>
     <a href="/taro/zh/thanks.html">致谢</a>
-    <select class="lang-select" aria-label="语言" onchange="if(this.value) location.href=this.value">
+    <select class="lang-select" aria-label="语言">
       <option value="/taro/">RU</option>
       <option value="/taro/en/">EN</option>
       <option value="/taro/de/">DE</option>
@@ -74,9 +76,14 @@ html.dyn-moon[data-bg]::before{background-image:linear-gradient(180deg, rgba(9,7
   </ul>
   <p class="hint">文章目前为俄语。</p>
 </main>
-<footer class="site"><div class="wrap"><p>© 安静牌阵. Rider–Waite–Smith (1909).</p><p><a href="/taro/zh/">今日一牌</a> · <a href="/taro/zh/rasklad.html">牌阵</a> · <a href="/taro/zh/karty.html">牌义</a></p><p class="hint">仅供娱乐与自我反思。</p></div></footer>
+<footer class="site"><div class="wrap">
+    <p class="hint">龙纹图案: <a href="https://commons.wikimedia.org/wiki/File:Chinese_black_dragon.svg" rel="noopener">Chinese black dragon</a> — Angelus, CC BY-SA 3.0</p><p>© 安静牌阵. Rider–Waite–Smith (1909).</p><p><a href="/taro/zh/">今日一牌</a> · <a href="/taro/zh/rasklad.html">牌阵</a> · <a href="/taro/zh/karty.html">牌义</a></p><p class="hint">仅供娱乐与自我反思。</p></div></footer>
 <script src="/taro/assets/cards.js"></script>
 <script src="/taro/assets/cards.zh.js"></script>
 <script src="/taro/assets/moon-bg-phases.js" defer></script>
+<script src="/taro/assets/dragon-bg.js" defer></script>
+<script src="/taro/assets/lang-switch.js" defer></script>
 </body>
 </html>
+
+
