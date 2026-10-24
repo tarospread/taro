@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Обложки и стиль — выбор</title>
+<style>
+  :root{
+    --bg:#0d0a14; --panel:#161021; --line:#2e2643; --text:#f3eefb; --muted:#a89bc6;
+    --gold:#d8b26a; --accent:#d8b26a; --deep:#1b1230; --soft:#8a6f9e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Georgia,serif}
+  header{padding:22px 24px 10px;border-bottom:1px solid var(--line)}
+  h1{margin:0 0 4px;font-size:20px;font-weight:400;color:var(--gold)}
+  header p{margin:0;color:var(--muted);font-size:13px}
+  .wrap{display:grid;grid-template-columns:2fr 1fr;gap:22px;padding:22px 24px 40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0a0710;cursor:pointer;transition:border-color .15s}
+  .card:hover{border-color:var(--accent)}
+  .card.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+  .cover{position:relative;aspect-ratio:4/5;background:linear-gradient(160deg,#3b2d55,#8a6f9e);overflow:hidden}
+  .cover .photo{position:absolute;inset:0;background:
+      radial-gradient(120% 90% at 20% 15%, rgba(255,255,255,.14), transparent 60%),
+      linear-gradient(160deg,#3b2d55 0%,#6b5590 45%,#8a6f9e 100%)}
+  .cover .scrim{position:absolute;inset:0;background:linear-gradient(180deg, transparent 35%, rgba(10,8,14,.85) 100%)}
+  .cover .scrim.top{background:linear-gradient(180deg, rgba(10,8,14,.85) 0%, transparent 65%)}
+  .cover .txt{position:absolute;left:8%;right:8%;bottom:9%;z-index:2}
+  .cover .txt.top{bottom:auto;top:12%}
+  .cover h3{color:var(--text-card,#fff);margin:0;font-size:clamp(15px,2.1vw,22px);line-height:1.15;font-family:var(--f-title);font-weight:800;letter-spacing:-.01em}
+  .cover p{margin:6px 0 0;font-size:11.5px;color:color-mix(in srgb, var(--text-card,#fff) 72%, transparent)}
+  .cover .line{width:56px;height:3px;background:var(--accent);margin:10px auto 0;border-radius:2px}
+  .cover .badge{position:absolute;top:6%;padding:5px 10px;border-radius:8px;background:rgba(0,0,0,.85);font-size:11px;letter-spacing:.06em;font-family:var(--f-title);font-weight:700}
+  .cover .badge.l{left:6%}.cover .badge.r{right:6%}
+  .cover .split{position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff;transform:translateX(-1px)}
+  .cover .price{position:absolute;left:8%;bottom:9%;z-index:2}
+  .cover .price b{display:block;font-family:var(--f-title);font-size:clamp(22px,3.4vw,34px);color:var(--accent);line-height:1}
+  .cover .price span{display:block;font-size:11px;color:#cfc6dd;margin-top:6px}
+  .cover .quote-mark{position:absolute;left:7%;top:38%;font-size:64px;line-height:1;color:var(--accent);font-family:var(--f-title);opacity:.9}
+  .cover .btn{display:inline-block;margin-top:10px;padding:7px 14px;border-radius:999px;background:var(--accent);color:#140f1f;font-size:11px;font-weight:700}
+  .card .label{padding:9px 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .card .label b{font-weight:400;color:var(--gold);font-size:13px}
+  .card .label span{color:var(--muted);font-size:11px}
+  aside{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;height:fit-content;position:sticky;top:16px}
+  aside h2{margin:0 0 10px;font-size:14px;color:var(--gold);font-weight:400}
+  .group{margin-bottom:16px}
+  .group h3{margin:0 0 7px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:400}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{border:1px solid var(--line);background:#0e0a16;color:var(--text);border-radius:999px;padding:6px 11px;font-size:12px;cursor:pointer;font-family:inherit}
+  .chip.on{border-color:var(--accent);color:#120e1b;background:var(--accent)}
+  .sw{display:flex;gap:6px;align-items:center;margin-top:6px}
+  .sw i{width:22px;height:22px;border-radius:6px;display:block;border:1px solid rgba(255,255,255,.12)}
+'  .pickers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pickers label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted)}
+  .pickers input[type=color]{width:100%;height:32px;border:1px solid var(--line);border-radius:8px;background:#0e0a16;cursor:pointer;padding:2px}
+  pre{margin:12px 0 0;'background:#0a0710;border:1px solid var(--line);border-radius:10px;padding:10px;font:11.5px/1.5 Consolas,monospace;color:#cfc3e8;white-space:pre-wrap}
+  .note{margin:10px 0 0;color:#6f6488;font-size:11.5px}
+  @media(max-width:980px){.wrap{grid-template-columns:1fr}aside{position:static}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Обложки и стиль — выберите вариант</h1>
+  <p>Кликните макет и палитру: строка внизу покажет, что я вставлю в бота. Все обложки — 4:5 для ленты.</p>
+</header>
+
+<div class="wrap">
+  <div class="grid" id="grid"></div>
+
+  <aside>
+    <div class="group">
+      <h3>Готовые палитры</h3>
+      <div class="chips" id="palettes"></div>
+      <div class="sw" id="sw"></div>
+    </div>
+    <div class="group">
+      <h3>Свои цвета</h3>
+      <div class="pickers">
+        <label>Акцент <input type="color" id="c-accent" value="#d8b26a"></label>
+        <label>Фон сверху <input type="color" id="c-top" value="#3b2d55"></label>
+        <label>Фон снизу <input type="color" id="c-bottom" value="#8a6f9e"></label>
+        <label>Текст <input type="color" id="c-text" value="#ffffff"></label>
+      </div>
+      <div class="chips" style="margin-top:8px">
+        <button class="chip" id="reset">сбросить к палитре</button>
+        <button class="chip" id="random">случайно</button>
+      </div>
+    </div>
+    <div class="group">
+      <h3>Шрифт заголовка</h3>
+      <div class="chips" id="fonts"></div>
+    </div>
+    <div class="group">
+      <h3>Макет</h3>
+      <div class="chips" id="templates"></div>
+    </div>
+    <pre id="cfg"></pre>
+    <p class="note">Макеты те же, что уже работают в боте: вопрос, цена, отзыв, анонс, до/после. Палитра и шрифт применяются ко всем сразу.</p>
+  </aside>
+</div>
+
+<script>
+const ПАЛИТРЫ = {
+  'лиловый + золото': { deep:'#1b1230', soft:'#8a6f9e', photo:'linear-gradient(160deg,#3b2d55 0%,#6b5590 45%,#8a6f9e 100%)', accent:'#d8b26a' },
+  'тёплый песок':     { deep:'#241a12', soft:'#c2a06a', photo:'linear-gradient(160deg,#4a3a2a 0%,#8c7048 50%,#c2a06a 100%)', accent:'#e8c98b' },
+  'нефрит + медь':    { deep:'#0f201c', soft:'#4f8a76', photo:'linear-gradient(160deg,#123028 0%,#2f6a58 50%,#6fa892 100%)', accent:'#d9a86a' },
+  'чернила + сливки': { deep:'#14161c', soft:'#5b6472', photo:'linear-gradient(160deg,#1b1f27 0%,#3a424f 55%,#6d7686 100%)', accent:'#efe6d4' },
+  'бордо + роза':     { deep:'#2a1016', soft:'#8f4a5c', photo:'linear-gradient(160deg,#3a1620 0%,#6f3344 50%,#a4657a 100%)', accent:'#e3b3a0' }
+};
+
+const ШРИФТЫ = {
+  'Manrope': "'Manrope','Segoe UI',system-ui,sans-serif",
+  'Unbounded': "'Unbounded','Segoe UI',system-ui,sans-serif",
+  'Playfair': "'Playfair Display',Georgia,serif",
+  'Cormorant': "'Cormorant Garamond',Georgia,serif"
+};
+
+const МАКЕТЫ = [
+  { id:'вопрос', name:'Вопрос', hint:'крючок в ленте' },
+  { id:'цена',   name:'Цена',   hint:'прайс и акции' },
+  { id:'отзыв',  name:'Отзыв',  hint:'доверие' },
+  { id:'анонс',  name:'Анонс',  hint:'праздник, набор' },
+  { id:'доПосле',name:'До / после', hint:'результат' }
+];
+
+let выбрано = { palettes:'лиловый + золото', font:'Manrope', template:'все' };
+let своё = null;   // {accent, top, bottom, text} — если заданы вручную
+
+function оттенок(hex, к){
+  const n = parseInt(hex.replace('#',''),16);
+  let r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+  r=Math.max(0,Math.min(255,Math.round(r*к))); g=Math.max(0,Math.min(255,Math.round(g*к))); b=Math.max(0,Math.min(255,Math.round(b*к)));
+  return '#'+((r<<16)|(g<<8)|b).toString(16).padStart(6,'0');
+}
+
+function яркость(hex){
+  const n = parseInt(hex.replace('#',''),16);
+  const r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+  return (0.299*r + 0.587*g + 0.114*b) / 255;
+}
+
+function htmlМакета(м){
+  if(м === 'вопрос') return `
+    <div class="photo"></div><div class="scrim top"></div>
+    <div class="txt top"><h3>Тяжёлая шея к вечеру?</h3><p>мягкий массаж · 40 минут</p><div class="line"></div></div>`;
+  if(м === 'цена') return `
+    <div class="photo"></div><div class="scrim"></div>
+    <div class="price"><h3 style="margin:0 0 6px">Общий массаж</h3><b>3 500 ₽</b><span>90 минут · масло · тёплый кабинет</span></div>`;
+  if(м === 'отзыв') return `
+    <div class="photo"></div><div class="scrim"></div>
+    <div class="quote-mark">«</div>
+    <div class="txt"><h3 style="font-weight:500">Спина перестала ныть, сплю без боли</h3><p>— Анна, 34 года</p></div>`;
+  if(м === 'анонс') return `
+    <div class="photo"></div><div class="scrim top"></div>
+    <div class="txt top" style="text-align:center;left:10%;right:10%"><h3 style="color:var(--accent)">8 марта</h3>
+      <p style="font-size:13px;color:#fff">Подарочные сертификаты на массаж</p><span class="btn">записаться</span></div>`;
+  return `
+    <div class="photo"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,var(--soft) 0 50%, var(--deep) 50% 100%);opacity:.85"></div>
+    <div class="split"></div>
+    <span class="badge l">ДО</span><span class="badge r">ПОСЛЕ</span>
+    <div class="txt" style="text-align:center"><p style="color:#fff">10 сеансов, 6 недель</p></div>`;
+}
+
+function отрисовать(){
+  const б = ПАЛИТРЫ[выбрано.palettes];
+  const п = {
+    accent: (своё && своё.accent) || б.accent,
+    deep:   своё ? оттенок(своё.bottom, 0.55) : б.deep,
+    soft:   своё ? своё.bottom : б.soft,
+    photo:  своё ? `linear-gradient(160deg,${своё.top} 0%,${своё.bottom} 100%)` : б.photo,
+    text:   (своё && своё.text) || '#ffffff'
+  };
+  document.documentElement.style.setProperty('--accent', п.accent);
+  document.documentElement.style.setProperty('--deep', п.deep);
+  document.documentElement.style.setProperty('--soft', п.soft);
+  document.documentElement.style.setProperty('--text-card', п.text);
+  document.documentElement.style.setProperty('--f-title', ШРИФТЫ[выбрано.font]);
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  МАКЕТЫ.forEach(м => {
+    const el = document.createElement('div');
+    el.className = 'card' + (выбрано.template === м.id ? ' on' : '');
+    el.innerHTML = `
+      <div class="cover" style="background:${п.photo}">${htmlМакета(м.id)}</div>
+      <div class="label"><b>${м.name}</b><span>${м.hint}</span></div>`;
+    el.onclick = () => { выбрано.template = м.id; отрисовать(); };
+    grid.appendChild(el);
+  });
+
+  document.getElementById('sw').innerHTML = `
+    <i style="background:${п.photo}" title="фото"></i>
+    <i style="background:${п.deep}" title="тёмный"></i>
+    <i style="background:${п.accent}" title="акцент"></i>
+    <i style="background:${п.soft}" title="средний"></i>`;
+
+  const строка = своё
+    ? `brand: { custom: true, accent: '${п.accent}', gradient: ['${своё.top}','${своё.bottom}'], text: '${п.text}', font: '${выбрано.font}' }`
+    : `brand: { palette: '${выбрано.palettes}', font: '${выбрано.font}', accent: '${п.accent}' }`;
+  const предупреждение = (яркость(п.text) < 0.55 && яркость(своё ? своё.bottom : б.soft) > 0.6)
+    ? '  ⚠ светлый текст на светлом фоне — плохо читается' : '';
+  document.getElementById('cfg').textContent = строка + `\ntemplate: '${выбрано.template}'` + предупреждение;
+}
+
+function чипы(container, значения, ключ, метка){
+  const c = document.getElementById(container);
+  c.innerHTML = '';
+  значения.forEach(з => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (выбрано[ключ] === з ? ' on' : '');
+    b.textContent = метка ? метка(з) : з;
+    b.onclick = () => { выбрано[ключ] = з; if (ключ === 'palettes') своё = null; отрисовать(); };
+    c.appendChild(b);
+  });
+}
+
+function связатьЦвет(id, ключ){
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    const б = ПАЛИТРЫ[выбрано.palettes];
+    if (!своё) своё = { accent: б.accent, top: б.photo.match(/#[0-9a-f]{6}/gi)[0], bottom: б.photo.match(/#[0-9a-f]{6}/gi).pop(), text: '#ffffff' };
+    своё[ключ] = el.value;
+    отрисовать();
+  });
+}
+связатьЦвет('c-accent','accent');
+связатьЦвет('c-top','top');
+связатьЦвет('c-bottom','bottom');
+связатьЦвет('c-text','text');
+
+document.getElementById('reset').onclick = () => {
+  своё = null;
+  const б = ПАЛИТРЫ[выбрано.palettes];
+  const цв = б.photo.match(/#[0-9a-f]{6}/gi);
+  document.getElementById('c-accent').value = б.accent;
+  document.getElementById('c-top').value = цв[0];
+  document.getElementById('c-bottom').value = цв[цв.length-1];
+  document.getElementById('c-text').value = '#ffffff';
+  отрисовать();
+};
+
+document.getElementById('random').onclick = () => {
+  const сл = () => '#' + Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0');
+  const верх = сл(), низ = сл();
+  своё = { accent: сл(), top: верх, bottom: низ, text: яркость(низ) > 0.55 ? '#141018' : '#ffffff' };
+  document.getElementById('c-accent').value = своё.accent;
+  document.getElementById('c-top').value = своё.top;
+  document.getElementById('c-bottom').value = своё.bottom;
+  document.getElementById('c-text').value = своё.text;
+  отрисовать();
+};
+
+чипы('palettes', Object.keys(ПАЛИТРЫ), 'palettes');
+чипы('fonts', Object.keys(ШРИФТЫ), 'font');
+чипы('templates', ['все', ...МАКЕТЫ.map(м => м.id)], 'template', з => з === 'все' ? 'все' : (МАКЕТЫ.find(м => м.id === з) || {}).name);
+отрисовать();
+</script>
+</body>
+</html>
+
